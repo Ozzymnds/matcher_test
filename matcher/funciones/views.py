@@ -1,4 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from .models import School, Company, Activity, Feedback, Preference, Student, Teacher, User, UserType
 from .serializers import SchoolSerializer, CompanySerializer, ActivitySerializer, FeedbackSerializer, PreferenceSerializer, StudentSerializer, TeacherSerializer, UserSerializer, UserTypeSerializer
 
@@ -46,3 +49,30 @@ class StudentView(viewsets.ModelViewSet):
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
     queryset = Teacher.objects.all()
+
+
+class MatchView(APIView):
+    def get(self, request, format=None):
+        preferences = Preference.objects.all()
+        matches = []
+
+        for preference in preferences:
+            student = preference.student
+            activity = preference.activity
+
+            matching_companies = Company.objects.filter(
+                work_area__icontains=activity.name)
+
+            for company in matching_companies:
+                matches.append({
+                    'student_dni': student.student_dni,
+                    'student_name': student.name,
+                    'activity_id': activity.activity_id,
+                    'activity_name': activity.name,
+                    'company_cif': company.company_cif,
+                    'company_name': company.name,
+                    'company_work_area': company.work_area
+                })
+                
+        return Response(matches, status=status.HTTP_200_OK)
+    
