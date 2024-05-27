@@ -12,6 +12,7 @@ export function HomePage() {
                     <li><Link to="/companies">Companies</Link></li>
                     <li><Link to="/teachers">Profesores</Link></li>
                     <li><Link to="/activities">Actividades</Link></li>
+                    <li><Link to="/usertypes">Tipos de Usuarios</Link></li>
                 </ul>
             </nav>
         </div>

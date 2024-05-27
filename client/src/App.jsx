@@ -11,6 +11,8 @@ import { TeacherFormPage } from './pages/teacher/TeacherFormPage';
 import { ActivityPage } from './pages/activity/ActivityPage';
 import { ActivityFormPage } from './pages/activity/ActivityFormPage';
 import './App.css'
+import { UserTypePage } from './pages/user_type/UserTypePage';
+import { UserTypeFormPage } from './pages/user_type/UserTypeFormPage';
 
 function App() {
   return (
@@ -39,6 +41,10 @@ function App() {
           <Route path='/activities' element={<ActivityPage />} />
           <Route path='/activities-create' element={<ActivityFormPage />} />
           <Route path='/activities/:id' element={<ActivityFormPage />} />
+
+          <Route path='/usertypes' element={<UserTypePage />} />
+          <Route path='/usertypes-create' element={<UserTypeFormPage />} />
+          <Route path='/usertypes/:id' element={<UserTypeFormPage />} />
         </Routes>
       </div>
     </BrowserRouter>
