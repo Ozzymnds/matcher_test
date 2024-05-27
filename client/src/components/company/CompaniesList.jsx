@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { getAllSchools } from "../../api/school.api";
-import { SchoolCard } from "./SchoolCard";
-import { Navigation } from "./SchoolNavigation";
+import { getAllCompanies } from "../../api/company.api";
+import { CompanyCard } from "./CompanyCard";
+import { Navigation } from "./CompanyNavigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export function SchoolList() {
-    const [schools, setSchools] = useState([]);
+export function CompanyList() {
+    const [companies, setCompanies] = useState([]);
 
-    const loadSchools = async () => {
+    const loadCompanies = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/schools/', {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
                 withCredentials: false,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            setSchools(res.data);
+            setCompanies(res.data);
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 console.log('Credenciales incorrectas.');
@@ -33,22 +33,22 @@ export function SchoolList() {
 
     // Con useEffect [] nos aseguramos de que se cargue esta información al renderizar la página
     useEffect(() => {
-        loadSchools();
+        loadCompanies();
     }, []);
 
     return (
         <div>
             <Navigation />
-            <h1>Lista de Escuelas</h1>
+            <h1>Lista de empresas</h1>
             <div className="grid grid-cols-3 gap-3">
-                {schools.map((school) => {
-                    console.log(school.school_id); // Verifica que los ids sean únicos
-                    return <SchoolCard key={school.school_id} school={school} />;
+                {companies.map((company) => {
+                    console.log(company.company_cif); // Verifica que los ids sean únicos
+                    return <CompanyCard key={company.company_cif} company={company} />;
                 })}
             </div>
             <button className="bg-green-500 px-3 py-3 rounded-lg mt3">
-                <Link to="/schools-create">Crear Escuela</Link>
+                <Link to="/companies-create">Crear Empresa</Link>
             </button>
         </div>
     );
-};
+}

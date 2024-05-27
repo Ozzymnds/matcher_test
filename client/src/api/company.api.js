@@ -8,11 +8,11 @@ export const getAllCompanies = async () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log('Fetched companies data:', res.data);
+        return res.data; // Ensure to return res.data directly
     } catch (error) {
-        console.log('Error fetching schools: ', error);
-        return null;
+        console.log('Error fetching companies: ', error);
+        return [];
     };
 };
 
@@ -24,10 +24,10 @@ export const getCompanyById = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log('Fetched company data:', res.data);
+        return res.data; // Ensure to return res.data directly
     } catch (error) {
-        console.log('Error fetching schools: ', error);
+        console.log('Error fetching company by ID: ', error);
         return null;
     };
 };
@@ -40,26 +40,26 @@ export const createCompany = async (company) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log('Created company data:', res.data);
+        return res.data;
     } catch (error) {
-        console.log('Error fetching schools: ', error);
+        console.log('Error creating company: ', error);
         return null;
     };
 };
 
-export const updateCompany = async (id) => {
+export const updateCompany = async (id, company) => {
     try {
-        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companies/${id}/`, {
+        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companies/${id}/`, company, {
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log('Updated company data:', res.data);
+        return res.data;
     } catch (error) {
-        console.log('Error fetching schools: ', error);
+        console.log('Error updating company: ', error);
         return null;
     };
 };
@@ -72,10 +72,10 @@ export const deleteCompany = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log('Deleted company data:', res.data);
+        return res.data;
     } catch (error) {
-        console.log('Error fetching schools: ', error);
+        console.log('Error deleting company: ', error);
         return null;
     };
 };

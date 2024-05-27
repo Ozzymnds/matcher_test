@@ -22,7 +22,7 @@ class Teacher(models.Model):
     last_name = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False)
     school_mail = models.EmailField(null=True, blank=True)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
 class Student(models.Model):
@@ -31,9 +31,9 @@ class Student(models.Model):
     last_name = models.CharField(max_length=255, null=True, blank=True)
     address = models.CharField(max_length=255, null=False)
     school_mail = models.EmailField(null=True, blank=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
 class Activity(models.Model):

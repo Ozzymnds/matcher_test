@@ -9,7 +9,9 @@ export function HomePage() {
                 <ul>
                     <li><Link to="/schools">Escuelas</Link></li>
                     <li><Link to="/students">Estudiantes</Link></li>
-                    {/* Agrega más enlaces según tus necesidades */}
+                    <li><Link to="/companies">Companies</Link></li>
+                    <li><Link to="/teachers">Profesores</Link></li>
+                    <li><Link to="/activities">Actividades</Link></li>
                 </ul>
             </nav>
         </div>

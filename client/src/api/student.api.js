@@ -2,55 +2,77 @@ import axios from "axios";
 
 export const getAllStudents = async () => {
     try {
-        const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
-            withCredentials: false,
+        const response = await fetch('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data; // Retornar directamente los datos JSON
     } catch (error) {
-        console.log('Error fetching students: ', error);
+        console.error('Error fetching students: ', error);
         return null;
-    };
+    }
 };
+
+
 
 export const getStudentById = async (id) => {
     try {
-        const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, {
-            withCredentials: false,
+        const response = await fetch(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
-        console.log('Error fetching students: ', error);
+        console.error('Error fetching student: ', error);
         return null;
-    };
+    }
 };
 
 export const createStudent = async (student) => {
     try {
-        const res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/students/', student, {
-            withCredentials: false,
+        const response = await fetch('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(student)
         });
-        console.log(res.data);
-        return res;
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
-        console.log('Error fetching students: ', error);
+        console.error('Error creating student: ', error);
         return null;
-    };
+    }
 };
 
-export const updateStudent = async (id) => {
+
+export const updateStudent = async (id, student) => {
     try {
-        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, {
+        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, student, {
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json'

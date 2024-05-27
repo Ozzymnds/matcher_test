@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { createSchool, deleteSchool, updateSchool, getSchoolById } from "../../api/school.api";
 import { useNavigate, useParams } from "react-router-dom";
+import { Navigation } from "../../components/school/SchoolNavigation";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 export function SchoolFormPage() {
     const { register, handleSubmit, setValue, formState: {
@@ -42,7 +44,12 @@ export function SchoolFormPage() {
         async function loadSchool() {
             if (params.id) {
                 try {
-                    const response = await getSchoolById(params.id);
+                    const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/schools/${params.id}/`, {
+                        withCredentials: false,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
                     if (response && response.data) {
                         const { data } = response;
                         setValue('name', data.name);
@@ -60,6 +67,7 @@ export function SchoolFormPage() {
 
     return (
         <div className='max-w-xl mx-auto'>
+            <Navigation />
             <form onSubmit={onSubmit}>
                 <input type="text"
                     placeholder="School name"
