@@ -8,6 +8,8 @@ import { CompanyPage } from './pages/company/CompanyPage';
 import { CompanyFormPage } from './pages/company/CompanyFormPage';
 import { TeacherPage } from './pages/teacher/TeacherPage';
 import { TeacherFormPage } from './pages/teacher/TeacherFormPage';
+import { ActivityPage } from './pages/activity/ActivityPage';
+import { ActivityFormPage } from './pages/activity/ActivityFormPage';
 import './App.css'
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
           <Route path="/teachers-create" element={<TeacherFormPage />} />
           <Route path="/teachers/:dni" element={<TeacherFormPage />} />
 
-          
+          <Route path='/activities' element={<ActivityPage />} />
+          <Route path='/activities-create' element={<ActivityFormPage />} />
+          <Route path='/activities/:id' element={<ActivityFormPage />} />
         </Routes>
       </div>
     </BrowserRouter>
