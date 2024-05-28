@@ -13,6 +13,8 @@ import { ActivityFormPage } from './pages/activity/ActivityFormPage';
 import './App.css'
 import { UserTypePage } from './pages/user_type/UserTypePage';
 import { UserTypeFormPage } from './pages/user_type/UserTypeFormPage';
+import { UserPage } from './pages/user/UserPage';
+import { UserFormPage } from './pages/user/UserFormPage';
 
 function App() {
   return (
@@ -45,6 +47,10 @@ function App() {
           <Route path='/usertypes' element={<UserTypePage />} />
           <Route path='/usertypes-create' element={<UserTypeFormPage />} />
           <Route path='/usertypes/:id' element={<UserTypeFormPage />} />
+
+          <Route path='/users' element={<UserPage />} />
+          <Route path='/users-create' element={<UserFormPage />} />
+          <Route path='/users/:id' element={<UserFormPage />} />
         </Routes>
       </div>
     </BrowserRouter>

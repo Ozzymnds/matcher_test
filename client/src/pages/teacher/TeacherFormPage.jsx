@@ -14,8 +14,8 @@ export function TeacherFormPage() {
 
     const dropdown = async () => {
         try {
-            const schools = await getAllSchools();
-            setSchools(schools);
+            const dropdownSchools = await getAllSchools();
+            setSchools(dropdownSchools);
         } catch (error) {
             console.error('Error fetching schools:', error);
         }

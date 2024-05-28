@@ -65,9 +65,7 @@ export function UserTypeFormPage() {
 
     useEffect(() => {
         async function loadUserType() {
-            console.log("antes del if", params);
             if (params.id) {
-                console.log("despues del if", params);
                 try {
                     const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/usertypes/${params.id}/`, {
                         withCredentials: false,
@@ -75,11 +73,8 @@ export function UserTypeFormPage() {
                             'Content-Type': 'application/json'
                         }
                     });
-                    console.log("primero dentro del try", params);
                     if (response && response.data) {
                         const { data } = response;
-                        console.log("la res", response)
-                        console.log("dentro del if tras declarar la res", data)
                         setValue('type_name', data.type_name);
                     } else {
                         console.log('No data found')
@@ -115,19 +110,16 @@ export function UserTypeFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            const accepted = window.confirm('Are you sure you want to delete this item?');
-                            if (accepted) {
-                                await deleteUserType(params.id)
-                                navigate('/usertypes');
-                                toast.success('Deleted', {
-                                    duration: 3000,
-                                    position: 'bottom-right',
-                                    style: {
-                                        background: 'red',
-                                        color: 'black'
-                                    }
-                                })
-                            }
+                            await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/usertypes/${params.id}/`);
+                            toast.success('Deleted', {
+                                duration: 3000,
+                                position: 'bottom-right',
+                                style: {
+                                    background: 'red',
+                                    color: 'black'
+                                }
+                            });
+                            navigate('/usertypes');
                         }}>Delete</button>
                 </div>
             }

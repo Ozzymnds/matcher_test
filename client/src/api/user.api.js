@@ -48,16 +48,15 @@ export const createUser = async (user) => {
     };
 };
 
-export const updateUser = async (id) => {
+export const updateUser = async (id, user) => {
     try {
-        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/users/${id}/`, {
+        const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/users/${id}/`, user, {
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        return res.data;
     } catch (error) {
         console.log('Error fetching users: ', error);
         return null;
@@ -72,7 +71,7 @@ export const deleteUser = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
+        console.log("eliminado");
         return res;
     } catch (error) {
         console.log('Error fetching users: ', error);

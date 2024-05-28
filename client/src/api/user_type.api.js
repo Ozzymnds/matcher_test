@@ -8,8 +8,7 @@ export const getAllUserTypes = async () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        return res.data;
     } catch (error) {
         console.log('Error fetching usertypes: ', error);
         return null;
