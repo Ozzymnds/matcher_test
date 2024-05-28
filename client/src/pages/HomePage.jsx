@@ -14,6 +14,7 @@ export function HomePage() {
                     <li><Link to="/activities">Actividades</Link></li>
                     <li><Link to="/usertypes">Tipos de Usuarios</Link></li>
                     <li><Link to="/users">Usuarios</Link></li>
+                    <li><Link to="/feedback">Feedback</Link></li>
                 </ul>
             </nav>
         </div>

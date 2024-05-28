@@ -9,7 +9,7 @@ export const getAllFeedbacks = async () => {
             }
         });
         console.log(res.data);
-        return res;
+        return res.data;
     } catch (error) {
         console.log('Error fetching feedbacks: ', error);
         return null;
