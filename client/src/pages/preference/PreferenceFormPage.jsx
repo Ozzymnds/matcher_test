@@ -151,16 +151,19 @@ export function PreferenceFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`);
-                            toast.success('Teacher deleted', {
-                                duration: 3000,
-                                position: 'bottom-right',
-                                style: {
-                                    background: 'red',
-                                    color: 'black'
-                                }
-                            });
-                            navigate('/preferences');
+                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            if (accepted) {
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`);
+                                toast.success('Teacher deleted', {
+                                    duration: 3000,
+                                    position: 'bottom-right',
+                                    style: {
+                                        background: 'red',
+                                        color: 'black'
+                                    }
+                                });
+                                navigate('/preferences');
+                            }
                         }}>Delete</button>
                 </div>}
         </div>

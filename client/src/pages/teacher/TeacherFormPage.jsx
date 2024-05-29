@@ -36,7 +36,7 @@ export function TeacherFormPage() {
                         'Content-Type': 'application/json'
                     }
                 });
-                
+
                 toast.success('Teacher updated', {
                     duration: 3000,
                     position: 'bottom-right',
@@ -152,16 +152,19 @@ export function TeacherFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/teachers/${params.dni}/`);
-                            toast.success('Teacher deleted', {
-                                duration: 3000,
-                                position: 'bottom-right',
-                                style: {
-                                    background: 'red',
-                                    color: 'black'
-                                }
-                            });
-                            navigate('/teachers');
+                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            if (accepted) {
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/teachers/${params.dni}/`);
+                                toast.success('Teacher deleted', {
+                                    duration: 3000,
+                                    position: 'bottom-right',
+                                    style: {
+                                        background: 'red',
+                                        color: 'black'
+                                    }
+                                });
+                                navigate('/teachers');
+                            }
                         }}>Delete</button>
                 </div>
             }

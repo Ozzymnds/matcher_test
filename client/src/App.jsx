@@ -19,6 +19,7 @@ import { FeedbackPage } from './pages/feedback/FeedbackPage';
 import { FeedbackFormPage } from './pages/feedback/FeedbackFormPage';
 import { PreferencePage } from './pages/preference/PreferencePage';
 import { PreferenceFormPage } from './pages/preference/PreferenceFormPage';
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           <Route path='/preferences-create' element={<PreferenceFormPage />} />
           <Route path='/preferences/:id' element={<PreferenceFormPage />} />
         </Routes>
+        <Toaster />
       </div>
     </BrowserRouter>
   )

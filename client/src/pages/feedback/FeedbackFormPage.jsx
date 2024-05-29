@@ -124,11 +124,19 @@ export function FeedbackFormPage() {
                 <h1>{params.id ? 'Editar ' : 'Crear '}</h1>
 
                 <label>Pros</label>
-                <input type="text" className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("strengths", { required: true })} />
+                <textarea
+                    type="text"
+                    className="bg-zinc-700 p-4 text-lg rounded-lg block w-full mb-3"
+                    {...register("strengths", { required: true })}
+                />
                 {errors.strengths && <span>Obligatorio</span>}
 
                 <label>Contras</label>
-                <input type="text" className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("weaknesses")} />
+                <textarea
+                    type="text"
+                    className="bg-zinc-700 p-4 text-lg rounded-lg block w-full mb-3"
+                    {...register("weaknesses")}
+                />
                 {errors.weaknesses && <span>Obligatorio</span>}
 
 
@@ -156,16 +164,19 @@ export function FeedbackFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`);
-                            toast.success('Deleted', {
-                                duration: 3000,
-                                position: 'bottom-right',
-                                style: {
-                                    background: 'red',
-                                    color: 'black'
-                                }
-                            });
-                            navigate('/feedback');
+                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            if (accepted) {
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`);
+                                toast.success('Deleted', {
+                                    duration: 3000,
+                                    position: 'bottom-right',
+                                    style: {
+                                        background: 'red',
+                                        color: 'black'
+                                    }
+                                });
+                                navigate('/feedback');
+                            }
                         }}>Delete</button>
                 </div>
             }

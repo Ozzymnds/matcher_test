@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getAllSchools } from "../../api/school.api";
 import { SchoolCard } from "./SchoolCard";
 import { Navigation } from "./SchoolNavigation";
 import axios from "axios";

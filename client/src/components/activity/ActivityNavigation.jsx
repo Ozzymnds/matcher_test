@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import "../Navigation.css";
 export function Navigation() {
     return (
-        <div>
-            <div>
-                <Link to="/home">
+        <div className="navigation-container">
+            <div className="navigation-item">
+                <Link to="/home" className="navigation-link">
                     <h2>Home</h2>
                 </Link>
             </div>
-            <div>
-                <Link to="/activities">
+            <div className="navigation-item">
+                <Link to="/activities" className="navigation-link">
                     <h2>Actividades</h2>
                 </Link>
             </div>

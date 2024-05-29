@@ -110,16 +110,19 @@ export function UserTypeFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/usertypes/${params.id}/`);
-                            toast.success('Deleted', {
-                                duration: 3000,
-                                position: 'bottom-right',
-                                style: {
-                                    background: 'red',
-                                    color: 'black'
-                                }
-                            });
-                            navigate('/usertypes');
+                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            if (accepted) {
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/usertypes/${params.id}/`);
+                                toast.success('Deleted', {
+                                    duration: 3000,
+                                    position: 'bottom-right',
+                                    style: {
+                                        background: 'red',
+                                        color: 'black'
+                                    }
+                                });
+                                navigate('/usertypes');
+                            }
                         }}>Delete</button>
                 </div>
             }

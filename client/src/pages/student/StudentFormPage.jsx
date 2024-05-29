@@ -181,16 +181,19 @@ export function StudentFormPage() {
                 <div>
                     <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
                         onClick={async () => {
-                            await deleteStudent(params.id);
-                            toast.success('Student deleted', {
-                                duration: 3000,
-                                position: 'bottom-right',
-                                style: {
-                                    background: 'red',
-                                    color: 'black'
-                                }
-                            });
-                            navigate('/students');
+                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            if (accepted) {
+                                await deleteStudent(params.id);
+                                toast.success('Student deleted', {
+                                    duration: 3000,
+                                    position: 'bottom-right',
+                                    style: {
+                                        background: 'red',
+                                        color: 'black'
+                                    }
+                                });
+                                navigate('/students');
+                            }
                         }}>Delete</button>
                 </div>
             }
