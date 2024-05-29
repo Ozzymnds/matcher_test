@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 export function PreferenceList() {
     const [preferences, setPreferences] = useState([]);
+    const [activities, setActivities] = useState([]); // Añade un estado para almacenar las actividades
+    const [students, setStudents] = useState([]);
 
     async function loadPreferences() {
         try {
@@ -34,16 +36,54 @@ export function PreferenceList() {
         }
     };
 
+    async function loadStudents() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setStudents(res.data);
+            } else {
+                console.log('Error fetching students');
+            }
+        } catch (error) {
+            console.error('Error fetching students:', error);
+        }
+    }
+
+    async function loadActivities() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setActivities(res.data);
+            } else {
+                console.log('Error fetching activities');
+            }
+        } catch (error) {
+            console.error('Error fetching activities:', error);
+        }
+    }
+
     useEffect(() => {
         loadPreferences();
+        loadActivities(); 
+        loadStudents();
     }, []);
 
     return (
         <div>
             <Navigation />
-            <div>
+            <div className='grid grid-cols-3 gap-4'>
                 {preferences.map((preference) => (
-                    <PreferenceCard key={preference.id} preference={preference} />
+                    <PreferenceCard key={preference.id} preference={preference} activities={activities} students={students} />
                 ))}
             </div>
             <div>
@@ -54,3 +94,4 @@ export function PreferenceList() {
         </div>
     )
 }
+

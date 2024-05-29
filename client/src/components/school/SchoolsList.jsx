@@ -31,7 +31,6 @@ export function SchoolList() {
         }
     };
 
-    // Con useEffect [] nos aseguramos de que se cargue esta información al renderizar la página
     useEffect(() => {
         loadSchools();
     }, []);
@@ -42,7 +41,6 @@ export function SchoolList() {
             <h1>Lista de Escuelas</h1>
             <div className="grid grid-cols-3 gap-3">
                 {schools.map((school) => {
-                    console.log(school.school_id); // Verifica que los ids sean únicos
                     return <SchoolCard key={school.school_id} school={school} />;
                 })}
             </div>

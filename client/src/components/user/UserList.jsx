@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export function UserList() {
     const [users, setUsers] = useState([]);
+    const [types, setTypes] = useState([]);
 
     async function loadUsers() {
         try {
@@ -33,10 +34,29 @@ export function UserList() {
                 console.error('Error:', error.response);
             }
         }
+    };
+
+    async function loadTypes() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/usertypes/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setTypes(res.data);
+            } else {
+                console.log('Error fetching students');
+            }
+        } catch (error) {
+            console.error('Error fetching students:', error);
+        }
     }
 
     useEffect(() => {
         loadUsers();
+        loadTypes();
     }, []);
 
     return (
@@ -44,7 +64,7 @@ export function UserList() {
             <Navigation />
             <div className='grid grid-cols-3 gap-4'>
                 {users.map((user) => (
-                    <UserCard key={user.id_user} user={user} />
+                    <UserCard key={user.id_user} user={user} type={types} />
                 ))}
             </div>
             <Link to="/users-create">

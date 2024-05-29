@@ -124,6 +124,14 @@ export function PreferenceFormPage() {
             <Navigation />
             <form onSubmit={onSubmit}>
                 <h1>{params.id ? 'Editar' : 'Crear'}</h1>
+                <label>Estudiante</label>
+                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("student", { required: true })}>
+                    <option value="">Seleccione un estudiante</option>
+                    {students.map((student) => (
+                        <option key={student.student_dni} value={student.student_dni}>{student.name}</option>
+                    ))}
+                    {errors.student && <span>Obligatorio</span>}
+                </select>
 
                 <label>Actividad</label>
                 <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("activity", { required: true })}>
@@ -134,14 +142,6 @@ export function PreferenceFormPage() {
                 </select>
                 {errors.activity && <span>Obligatorio</span>}
 
-                <label>Estudiante</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("student", { required: true })}>
-                    <option value="">Seleccione un estudiante</option>
-                    {students.map((student) => (
-                        <option key={student.student_dni} value={student.student_dni}>{student.name}</option>
-                    ))}
-                    {errors.student && <span>Obligatorio</span>}
-                </select>
 
                 <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="submit">Save</button>
                 <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="button" onClick={() => navigate('/preferences')}>Cancel</button>
@@ -160,7 +160,7 @@ export function PreferenceFormPage() {
                                     color: 'black'
                                 }
                             });
-                            navigate('/teachers');
+                            navigate('/preferences');
                         }}>Delete</button>
                 </div>}
         </div>

@@ -7,6 +7,7 @@ import axios from "axios";
 
 export function TeacherList() {
     const [teachers, setTeachers] = useState([]);
+    const [schools, setSchools] = useState([]);
 
     async function loadTeachers() {
         try {
@@ -35,8 +36,36 @@ export function TeacherList() {
         }
     };
 
+    async function loadSchools() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/schools/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setSchools(res.data);
+            } else {
+                console.log('Error fetching teachers');
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.log('Credenciales incorrectas.');
+            } else if (error.response && error.response.status === 403) {
+                console.error('Forbidden:', error.response);
+            } else if (error.response && error.response.status === 400) {
+                console.error('Bad request:', error.response);
+                window.location.reload();
+            } else {
+                console.error('Error:', error.response);
+            }
+        }
+    };
+
     useEffect(() => {
         loadTeachers();
+        loadSchools();
     }, []);
 
     return (
@@ -44,7 +73,7 @@ export function TeacherList() {
             <Navigation />
             <div className='grid grid-cols-3 gap-4'>
                 {teachers.map((teacher) => (
-                    <TeacherCard key={teacher.teacher_dni} teacher={teacher} />
+                    <TeacherCard key={teacher.teacher_dni} teacher={teacher} school={schools} />
                 ))}
             </div>
             <Link to="/teachers-create">

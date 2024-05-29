@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 export function FeedbackList() {
     const [feedbacks, setFeedbacks] = useState([]);
+    const [companies, setCompanies] = useState([]);
+    const [students, setStudents] = useState([]);
 
     async function loadFeedbacks() {
         try {
@@ -34,8 +36,46 @@ export function FeedbackList() {
         }
     };
 
+    async function loadStudents() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setStudents(res.data);
+            } else {
+                console.log('Error fetching students');
+            }
+        } catch (error) {
+            console.error('Error fetching students:', error);
+        }
+    }
+
+    async function loadCompanies() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setCompanies(res.data);
+            } else {
+                console.log('Error fetching activities');
+            }
+        } catch (error) {
+            console.error('Error fetching activities:', error);
+        }
+    }
+
     useEffect(() => {
         loadFeedbacks();
+        loadStudents();
+        loadCompanies();
     }, []);
 
     return (
@@ -43,7 +83,7 @@ export function FeedbackList() {
             <Navigation />
             <div className='grid grid-cols-3 gap-4'>
                 {feedbacks.map((feedback) => (
-                    <FeedbackCard key={feedback.id} feedback={feedback} />
+                    <FeedbackCard key={feedback.id} feedback={feedback} studentsData={students} companiesData={companies} />
                 ))}
             </div>
             <Link to="/feedback-create">

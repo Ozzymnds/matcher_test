@@ -131,14 +131,6 @@ export function FeedbackFormPage() {
                 <input type="text" className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("weaknesses")} />
                 {errors.weaknesses && <span>Obligatorio</span>}
 
-                <label>Company</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("company", { required: true })}>
-                    <option value="">Seleccione una empresa</option>
-                    {companies.map(company => (
-                        <option key={company.company_cif} value={company.company_cif}>{company.name}</option>
-                    ))}
-                </select>
-                {errors.company && <span>Obligatorio</span>}
 
                 <label>Student</label>
                 <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("student", { required: true })}>
@@ -149,6 +141,14 @@ export function FeedbackFormPage() {
                 </select>
                 {errors.student && <span>Obligatorio</span>}
 
+                <label>Company</label>
+                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("company", { required: true })}>
+                    <option value="">Seleccione una empresa</option>
+                    {companies.map(company => (
+                        <option key={company.company_cif} value={company.company_cif}>{company.name}</option>
+                    ))}
+                </select>
+                {errors.company && <span>Obligatorio</span>}
                 <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="submit">Save</button>
             </form>
 
