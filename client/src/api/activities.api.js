@@ -8,8 +8,8 @@ export const getAllActivities = () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
-        return res;
+        console.log(res);
+        return res.data;
     } catch (error) {
         console.log('Error fetching activities: ', error);
         return null;

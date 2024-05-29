@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { createStudent, deleteStudent, updateStudent, getStudentById, getAllStudents } from "../../api/student.api";
 import { getAllCompanies } from "../../api/company.api";
 import { getAllTeachers } from "../../api/teacher.api";
-import { getAllSchools } from "../../api/school.api";
 import { Navigation } from "../../components/student/StudentNavigation"
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -17,20 +16,6 @@ export function StudentFormPage() {
 
     const [companies, setCompanies] = useState([]);
     const [teachers, setTeachers] = useState([]);
-    const [schools, setSchools] = useState([]);
-
-    const dropdownSchools = async () => {
-        try {
-            const schools = await getAllSchools();
-            setSchools(schools);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    useEffect(() => {
-        dropdownSchools();
-    }, []);
 
     const dropdownTeachers = async () => {
         try {
@@ -128,7 +113,6 @@ export function StudentFormPage() {
                     setValue('school_mail', data.school_mail);
                     setValue('teacher', data.teacher);
                     setValue('company', data.company);
-                    setValue('school', data.school);
                 } else {
                     console.log('No data found for the given student ID');
                 }
@@ -180,15 +164,6 @@ export function StudentFormPage() {
                 </select>
                 {errors.company_cif && <span>El ID de la empresa es obligatorio</span>}
 
-                <label>School ID</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("school_id", { required: true })}>
-                    <option value="">Seleccione una escuela</option>
-                    {Array.isArray(schools) && schools.map(school => (
-                        <option key={school.school_id} value={school.school_id}>{school.name}</option>
-                    ))}
-                </select>
-                {errors.school_id && <span>El ID de la escuela es obligatorio</span>}
-
                 <label>Teacher ID</label>
                 <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("teacher_id", { required: true })}>
                     <option value="">Seleccione un profesor</option>
@@ -199,6 +174,7 @@ export function StudentFormPage() {
                 {errors.teacher_id && <span>El ID del profesor es obligatorio</span>}
 
                 <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="submit">Save</button>
+                <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="button" onClick={() => navigate('/students')}>Cancel</button>
             </form>
 
             {params.id &&

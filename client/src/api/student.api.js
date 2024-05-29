@@ -2,24 +2,18 @@ import axios from "axios";
 
 export const getAllStudents = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/funciones/api/v1/students/', {
-            method: 'GET',
+        const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            withCredentials: false,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-        return data; // Retornar directamente los datos JSON
+        console.log(res);
+        return res.data;
     } catch (error) {
-        console.error('Error fetching students: ', error);
+        console.log('Error fetching activities: ', error);
         return null;
-    }
+    };
 };
 
 

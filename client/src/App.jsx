@@ -17,6 +17,8 @@ import { UserPage } from './pages/user/UserPage';
 import { UserFormPage } from './pages/user/UserFormPage';
 import { FeedbackPage } from './pages/feedback/FeedbackPage';
 import { FeedbackFormPage } from './pages/feedback/FeedbackFormPage';
+import { PreferencePage } from './pages/preference/PreferencePage';
+import { PreferenceFormPage } from './pages/preference/PreferenceFormPage';
 
 function App() {
   return (
@@ -57,6 +59,10 @@ function App() {
           <Route path='/feedback' element={<FeedbackPage />} />
           <Route path='/feedback-create' element={<FeedbackFormPage />} />
           <Route path='/feedback/:id' element={<FeedbackFormPage />} />
+
+          <Route path='/preferences' element={<PreferencePage />} />
+          <Route path='/preferences-create' element={<PreferenceFormPage />} />
+          <Route path='/preferences/:id' element={<PreferenceFormPage />} />
         </Routes>
       </div>
     </BrowserRouter>

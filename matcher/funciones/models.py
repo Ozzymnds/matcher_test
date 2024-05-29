@@ -33,7 +33,6 @@ class Student(models.Model):
     school_mail = models.EmailField(null=True, blank=True)
     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
 class Activity(models.Model):
