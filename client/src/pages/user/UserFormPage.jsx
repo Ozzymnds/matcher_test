@@ -110,21 +110,26 @@ export function UserFormPage() {
     });
 
     return (
-        <div className='max-w-xl mx-auto'>
+        <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center">
             <Navigation />
-            <form onSubmit={onSubmit}>
-                <h1>{params.id ? 'Editar Usuario' : 'Crear Usuario'}</h1>
+            <form onSubmit={onSubmit} className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mt-10">
+                <h1 className="text-2xl font-semibold text-blue-700 mb-6">{params.id ? 'Editar Usuario' : 'Crear Usuario'}</h1>
 
-                <label>Nombre</label>
-                <input type="text" className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("user_name", { required: true })} />
+                <label className="block mb-2 text-sm font-medium text-gray-700">Nombre</label>
+                <input
+                    type="text"
+                    className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800" {...register("user_name", { required: true })} />
                 {errors.user_name && <span>El nombre es obligatorio</span>}
 
-                <label>Password</label>
-                <input type="password" className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("user_password", { required: true })} />
+                <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                <input
+                    type="password"
+                    className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800" {...register("user_password", { required: true })} />
                 {errors.user_password && <span>El password es obligatorio</span>}
 
-                <label>Type of user</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("id_type", { required: true })}>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Type of user</label>
+                <select
+                    className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800" {...register("id_type", { required: true })}>
                     <option value="">Choose</option>
                     {userTypes.map(userType => (
                         <option key={userType.id_type} value={userType.id_type}>{userType.type_name}</option>

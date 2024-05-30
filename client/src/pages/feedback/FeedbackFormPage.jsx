@@ -22,7 +22,7 @@ export function FeedbackFormPage() {
         } catch (error) {
             console.error('Error fetching companies:', error);
         }
-    }
+    };
 
     const dropdownStudents = async () => {
         try {
@@ -31,7 +31,7 @@ export function FeedbackFormPage() {
         } catch (error) {
             console.error('Error fetching students:', error);
         }
-    }
+    };
 
     useEffect(() => {
         dropdownCompanies();
@@ -48,7 +48,6 @@ export function FeedbackFormPage() {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(res.data);
                 toast.success('Updated', {
                     duration: 3000,
                     position: 'bottom-right',
@@ -64,7 +63,6 @@ export function FeedbackFormPage() {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(res)
                 toast.success('Created', {
                     duration: 3000,
                     position: 'bottom-right',
@@ -100,8 +98,8 @@ export function FeedbackFormPage() {
                 if (res && res.data) {
                     const { data } = res;
                     setValue('id', data.id);
-                    setValue('company', data.company_id); // Updated to match the expected field name
-                    setValue('student', data.student_id); // Updated to match the expected field name
+                    setValue('company', data.company_id);
+                    setValue('student', data.student_id);
                     setValue('strengths', data.strengths);
                     setValue('weaknesses', data.weaknesses);
                 } else {
@@ -111,60 +109,61 @@ export function FeedbackFormPage() {
                 console.error('Error fetching feedback:', e.response?.data || e.message);
             }
         }
-    }
+    };
 
     useEffect(() => {
         loadFeedback();
     }, [params.id, setValue]);
 
     return (
-        <div className='max-w-xl mx-auto'>
+        <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center">
             <Navigation />
-            <form onSubmit={onSubmit}>
-                <h1>{params.id ? 'Editar ' : 'Crear '}</h1>
+            <form onSubmit={onSubmit} className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mt-10">
+                <h1 className="text-2xl font-semibold text-blue-700 mb-6">{params.id ? 'Editar Feedback' : 'Crear Feedback'}</h1>
 
-                <label>Pros</label>
+                <label className="block text-gray-900">Pros</label>
                 <textarea
                     type="text"
-                    className="bg-zinc-700 p-4 text-lg rounded-lg block w-full mb-3"
+                    className="bg-blue-100 p-4 text-lg rounded-lg block w-full mb-3 text-gray-900"
                     {...register("strengths", { required: true })}
                 />
-                {errors.strengths && <span>Obligatorio</span>}
+                {errors.strengths && <span className="text-red-500">Obligatorio</span>}
 
-                <label>Contras</label>
+                <label className="block text-gray-900">Contras</label>
                 <textarea
                     type="text"
-                    className="bg-zinc-700 p-4 text-lg rounded-lg block w-full mb-3"
-                    {...register("weaknesses")}
+                    className="bg-blue-100 p-4 text-lg rounded-lg block w-full mb-3 text-gray-900"
+                    {...register("weaknesses", { required: true })}
                 />
-                {errors.weaknesses && <span>Obligatorio</span>}
+                {errors.weaknesses && <span className="text-red-500">Obligatorio</span>}
 
-
-                <label>Student</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("student", { required: true })}>
+                <label className="block text-gray-900">Student</label>
+                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("student", { required: true })}>
                     <option value="">Seleccione un estudiante</option>
                     {students.map(student => (
                         <option key={student.student_dni} value={student.student_dni}>{student.name}</option>
                     ))}
                 </select>
-                {errors.student && <span>Obligatorio</span>}
+                {errors.student && <span className="text-red-500">Obligatorio</span>}
 
-                <label>Company</label>
-                <select className='bg-zinc-700 p-3 rounded-lg block w-full mb-3' {...register("company", { required: true })}>
+                <label className="block text-gray-900">Company</label>
+                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("company", { required: true })}>
                     <option value="">Seleccione una empresa</option>
                     {companies.map(company => (
                         <option key={company.company_cif} value={company.company_cif}>{company.name}</option>
                     ))}
                 </select>
-                {errors.company && <span>Obligatorio</span>}
-                <button className='bg-indigo-500 p-3 rounded-lg block w-full mt-3' type="submit">Save</button>
+                {errors.company && <span className="text-red-500">Obligatorio</span>}
+
+                <button className="bg-blue-500 text-white px-3 py-3 rounded-lg mt-3 w-full" type="submit">Guardar</button>
             </form>
 
             {params.id &&
-                <div>
-                    <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
+                <div className="w-full max-w-2xl mt-6">
+                    <button
+                        className="bg-red-500 text-white p-3 rounded-lg block w-full mt-3"
                         onClick={async () => {
-                            const accepted = window.confirm('Are you sure you want to delete this field?')
+                            const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
                                 await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`);
                                 toast.success('Deleted', {
@@ -177,7 +176,8 @@ export function FeedbackFormPage() {
                                 });
                                 navigate('/feedback');
                             }
-                        }}>Delete</button>
+                        }}
+                    >Eliminar</button>
                 </div>
             }
         </div>

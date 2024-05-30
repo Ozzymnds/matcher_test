@@ -24,7 +24,7 @@ import { Toaster } from 'react-hot-toast'
 function App() {
   return (
     <BrowserRouter>
-      <div className="container">
+      <div>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<HomePage />} />

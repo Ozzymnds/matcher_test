@@ -9,7 +9,6 @@ export function CompanyCard({ company }) {
                 navigate(`/companies/${company.company_cif}`);
             }}>
             <h2>{company.name}</h2>
-            <p>{company.company_cif}</p>
             <p>{company.address}</p>
             <p>{company.mail}</p>
             <p>{company.website}</p>

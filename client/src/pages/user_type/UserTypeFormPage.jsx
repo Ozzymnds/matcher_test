@@ -88,13 +88,15 @@ export function UserTypeFormPage() {
     }, [params.id, setValue]);
 
     return (
-        <div className='max-w-xl mx-auto'>
+        <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center">
             <Navigation />
-            <form onSubmit={onSubmit}>
-                <input type="text"
-                    placeholder="Type name"
-                    {...register("type_name", { required: true })}
-                    className='bg-zinc-700 p-3 rounded-lg block w-full mb3' />
+            <form onSubmit={onSubmit} className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mt-10">
+                <h1 className="text-2xl font-semibold text-blue-700 mb-6">{params.id ? 'Editar' : 'Crear'}</h1>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                <input
+                    type="text"
+                    className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800"
+                    {...register("type_name", { required: true })} />
                 {errors.type_name && toast.error('this field is required', {
                     duration: 3000,
                     position: 'bottom-right',
@@ -107,8 +109,9 @@ export function UserTypeFormPage() {
             </form>
 
             {params.id &&
-                <div>
-                    <button className='bg-red-500 p-3 rounded-lg block w-full mt-3'
+                <div className="w-full max-w-2xl mt-6 mb-3">
+                    <button
+                        className="bg-red-500 text-white p-3 rounded-lg block w-full mt-3"
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this field?')
                             if (accepted) {

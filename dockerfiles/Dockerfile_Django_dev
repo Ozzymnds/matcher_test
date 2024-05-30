@@ -1,0 +1,24 @@
+# Pull base image
+FROM python:3.9.16-bullseye
+
+# Set environment variables
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set work directory
+WORKDIR /code
+RUN apt-get update
+
+# Copy project
+COPY ./matcher_backend/ ./matcher_backend/
+ENV PYTHONPATH /code/matcher_backend:$PYTHONPATH
+
+# Install dependencies
+RUN pip install -r /home/diego/matcher_test/requirements.txt
+
+
+COPY ./entrypoints/tail_f.sh .
+
+RUN chmod +x /code/tail_f.sh
+ENTRYPOINT ["/code/tail_f.sh"]
