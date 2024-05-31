@@ -1,5 +1,5 @@
 # Pull base image
-FROM python:3.9.16-bullseye
+FROM python:3.12.0
 
 # Set environment variables
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
@@ -11,14 +11,14 @@ WORKDIR /code
 RUN apt-get update
 
 # Copy project
-COPY ../matcher/ ./matcher/
+COPY ./matcher/ ./matcher/
 ENV PYTHONPATH /code/matcher:$PYTHONPATH
 
 # Install dependencies
-COPY ../requirements.txt ./requirements.txt
+COPY ./requirements.txt ./requirements.txt
 RUN pip install -r ./requirements.txt
 
-COPY ../entrypoints/tail_f.sh .
+COPY ./entrypoints/tail_f.sh .
 
 RUN chmod +x /code/tail_f.sh
 ENTRYPOINT ["/code/tail_f.sh"]
