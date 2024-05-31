@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import '../../style/Card.css';
 
 export function PreferenceCard({ preference, activities, students }) {
     const navigate = useNavigate();
@@ -7,12 +8,12 @@ export function PreferenceCard({ preference, activities, students }) {
     const studentName = students.find(student => student.student_dni === preference.student)?.name;
 
     return (
-        <div className='bg-zinc-500 p-3 hover:bg-zinc-800 hover:cursor-pointer'
+        <div className='card-container'
             onClick={() => {
                 navigate(`/preferences/${preference.id}`);
             }}>
-            <h2>Preferencia para estudiante: {studentName}</h2>
-            <h2>Nombre de la actividad elegida: {activityName}</h2>
+            <h2 className='card-title'>Preferencia para estudiante: {studentName}</h2>
+            <h2 className='card-title'>Nombre de la actividad elegida: {activityName}</h2>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Navigation.css";
+import "../../style/Navigation.css";
 export function Navigation () {
     return (
         <div className="navigation-container">

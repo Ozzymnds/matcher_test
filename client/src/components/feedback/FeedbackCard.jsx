@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import '../../style/Card.css';
 
 export function FeedbackCard({ feedback, companiesData, studentsData }) {
     const navigate = useNavigate();
@@ -9,12 +10,12 @@ export function FeedbackCard({ feedback, companiesData, studentsData }) {
     // Buscar el nombre de la empresa utilizando su CIF
     const companyName = companiesData.find(company => company.company_cif === feedback.company)?.name;
     return (
-        <div className='bg-zinc-500 p-3 hover:bg-zinc-800 hover:cursor-pointer'
+        <div className='card-container'
             onClick={() => {
                 navigate(`/feedback/${feedback.id}`);
             }}>
-            <h2>Estudiante: {studentName}</h2>
-            <h2>Empresa: {companyName}</h2>
+            <h2 className='card-title'>Estudiante: {studentName}</h2>
+            <h2 className='card-title'>Empresa: {companyName}</h2>
         </div>
     );
 }

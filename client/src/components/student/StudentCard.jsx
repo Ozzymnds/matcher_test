@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import '../../style/Card.css';
 
 export function StudentCard({ student, teacher, company }) {
     const navigate = useNavigate();
@@ -7,11 +8,11 @@ export function StudentCard({ student, teacher, company }) {
     const companyName = company.find(company => company.company_cif === student.company_id)?.name;
 
     return (
-        <div className='bg-zinc-500 p-3 hover:bg-zinc-800 hover:cursor-pointer'
+        <div className='card-container'
             onClick={() => {
                 navigate(`/students/${student.student_dni}`);
             }}>
-            <h2>{student.name}</h2>
+            <h2 className='card-title'>{student.name}</h2>
             <p>{student.last_name}</p>
             <p>{student.student_dni}</p>
             <p>{student.school_email}</p>
