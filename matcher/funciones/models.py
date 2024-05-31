@@ -32,7 +32,7 @@ class Student(models.Model):
     address = models.CharField(max_length=255, null=False)
     school_mail = models.EmailField(null=True, blank=True)
     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Activity(models.Model):
@@ -45,7 +45,7 @@ class Preference(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (('student', 'activity'),)
+        unique_together = (('student', 'activity'))
 
 
 class Feedback(models.Model):

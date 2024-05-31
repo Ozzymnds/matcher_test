@@ -18,7 +18,7 @@ ENV PYTHONPATH /code/matcher:$PYTHONPATH
 COPY ./requirements.txt ./requirements.txt
 RUN pip install -r ./requirements.txt
 
-COPY ./entrypoints/tail_f.sh .
+COPY ./entrypoints/tail_f.sh /code/
 
-RUN chmod +x /entrypoints/tail_f.sh
-ENTRYPOINT ["/entrypoints/tail_f.sh"]
+RUN chmod +x /code/tail_f.sh
+ENTRYPOINT ["/code/tail_f.sh"]

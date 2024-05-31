@@ -103,14 +103,13 @@ export function StudentFormPage() {
                     }
                 });
                 if (res && res.data) {
-                    const { student_dni, name, last_name, address, school_mail, teacher, company } = res.data;
+                    const { student_dni, name, last_name, address, school_mail, teacher } = res.data;
                     setValue('student_dni', student_dni);
                     setValue('name', name);
                     setValue('last_name', last_name);
                     setValue('address', address);
                     setValue('school_mail', school_mail);
                     setValue('teacher', teacher);
-                    setValue('company', company);
                 } else {
                     console.log('No data found for the given student ID');
                 }
@@ -173,18 +172,6 @@ export function StudentFormPage() {
                     {...register("address", { required: true })}
                 />
                 {errors.address && <span className="text-red-500">La dirección es obligatoria</span>}
-
-                <label className="block mb-2 text-sm font-medium text-gray-700">Company ID</label>
-                <select
-                    className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800"
-                    {...register("company_id", { required: true })}
-                >
-                    <option value="">Seleccione una empresa</option>
-                    {companies.map(company => (
-                        <option key={company.company_cif} value={company.company_cif}>{company.name}</option>
-                    ))}
-                </select>
-                {errors.company_cif && <span className="text-red-500">El ID de la empresa es obligatorio</span>}
 
                 <label className="block mb-2 text-sm font-medium text-gray-700">Teacher ID</label>
                 <select

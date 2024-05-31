@@ -1,8 +1,8 @@
 FROM node:20.10.0
  
-WORKDIR /client_frontend
+WORKDIR /code
 
-COPY ./client/ /client_frontend///
+COPY ./client/ /client_frontend/
 
 RUN npm install
 RUN npm install bootstrap
@@ -13,9 +13,9 @@ RUN npm install react-bootstrap
 RUN npm install js-cookie
 RUN npm install react-router-dom
 
-COPY ./entrypoints/tail_f.sh /
+COPY ./entrypoints/tail_f.sh /code/
 
 EXPOSE 5173
  
-RUN chmod +x /tail_f.sh
-ENTRYPOINT ["/tail_f.sh"]
+RUN chmod +x /code/tail_f.sh
+ENTRYPOINT ["/code/tail_f.sh"]

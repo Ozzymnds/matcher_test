@@ -14,7 +14,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./{{matcher}}_backend:/code/{{matcher}}_backend
+      - ./matcher_backend:/code/matcher_backend
     healthcheck:
       test: curl --fail http://localhost:8000/funciones/api/v1/healthcheck || exit 1
       interval: 60s
@@ -32,7 +32,7 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - ./{{client}}_frontend/:/{{client}}_frontend/
+      - ./client_frontend/:/client_frontend/
 
   funciones-db:
     container_name: matcher-db
