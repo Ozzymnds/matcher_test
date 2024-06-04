@@ -41,8 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'ckeditor',
     'coreapi',
-    'funciones'
+    'funciones',
+    'comments',
+    'categories',
+    'users',
+    'posts',
 ]
 
 MIDDLEWARE = [
