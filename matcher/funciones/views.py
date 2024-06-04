@@ -62,13 +62,14 @@ class MatcherView(APIView):
 
             # Buscar empresas que coincidan con el área de trabajo
             matching_companies = Company.objects.filter(
-                work_area__icontains=activity.name
+                work_area=activity
             )
 
             if matching_companies.exists():
                 company = matching_companies.first()
                 # Asignar la primera empresa coincidente al estudiante
-                student.company_id = company
+                # Assuming `company` is a ForeignKey field in the student model
+                student.company = company
                 student.save()
 
                 matches.append({
@@ -78,7 +79,8 @@ class MatcherView(APIView):
                     'activity_name': activity.name,
                     'company_cif': company.company_cif,
                     'company_name': company.name,
-                    'company_work_area': company.work_area
+                    # Accessing the name of the related activity
+                    'company_work_area': company.work_area.name
                 })
 
         return Response(matches, status=status.HTTP_200_OK)

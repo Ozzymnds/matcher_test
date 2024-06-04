@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
 
@@ -5,15 +6,6 @@ class School(models.Model):
     school_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=False)
-
-
-class Company(models.Model):
-    company_cif = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, null=False)
-    address = models.CharField(max_length=255, null=False)
-    mail = models.EmailField(null=False)
-    website = models.URLField(null=True, blank=True)
-    work_area = models.CharField(max_length=255, null=False)
 
 
 class Teacher(models.Model):
@@ -25,6 +17,36 @@ class Teacher(models.Model):
     school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
+class Activity(models.Model):
+    activity_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=False)
+
+
+class UserType(models.Model):
+    id_type = models.AutoField(primary_key=True)
+    type_name = models.CharField(max_length=255, null=False)
+
+    def __str__(self):
+        return self.type_name
+
+
+
+class User(models.Model):
+    id_user = models.AutoField(primary_key=True)
+    id_type = models.ForeignKey(UserType, on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=255, null=False)
+    user_password = models.CharField(max_length=255, null=False)
+
+
+class Company(models.Model):
+    company_cif = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=False)
+    address = models.CharField(max_length=255, null=False)
+    mail = models.EmailField(null=False)
+    website = models.URLField(null=True, blank=True)
+    work_area = models.ForeignKey(Activity, on_delete=models.CASCADE)
+
+
 class Student(models.Model):
     student_dni = models.CharField(max_length=9, primary_key=True)
     name = models.CharField(max_length=255, null=False)
@@ -32,12 +54,8 @@ class Student(models.Model):
     address = models.CharField(max_length=255, null=False)
     school_mail = models.EmailField(null=True, blank=True)
     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
-
-
-class Activity(models.Model):
-    activity_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, null=False)
+    company = models.ForeignKey(
+        Company, null=True, blank=True, on_delete=models.SET_NULL)
 
 
 class Preference(models.Model):
@@ -55,16 +73,4 @@ class Feedback(models.Model):
     weaknesses = models.TextField(null=True, blank=True)
 
     class Meta:
-        unique_together = (('student', 'company'),)
-
-
-class UserType(models.Model):
-    id_type = models.AutoField(primary_key=True)
-    type_name = models.CharField(max_length=255, null=False)
-
-
-class User(models.Model):
-    id_user = models.AutoField(primary_key=True)
-    id_type = models.ForeignKey(UserType, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=255, null=False)
-    user_password = models.CharField(max_length=255, null=False)
+        unique_together = (('student', 'company'))

@@ -13,7 +13,6 @@ export function StudentFormPage() {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [companies, setCompanies] = useState([]);
     const [teachers, setTeachers] = useState([]);
 
     const dropdownTeachers = async () => {
@@ -27,19 +26,6 @@ export function StudentFormPage() {
 
     useEffect(() => {
         dropdownTeachers();
-    }, []);
-
-    const dropdownCompanies = async () => {
-        try {
-            const companies = await getAllCompanies();
-            setCompanies(companies);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    useEffect(() => {
-        dropdownCompanies();
     }, []);
 
     const onSubmit = handleSubmit(async (data) => {
@@ -109,7 +95,7 @@ export function StudentFormPage() {
                     setValue('last_name', last_name);
                     setValue('address', address);
                     setValue('school_mail', school_mail);
-                    setValue('teacher', teacher);
+                    setValue('teacher_id', teacher);
                 } else {
                     console.log('No data found for the given student ID');
                 }

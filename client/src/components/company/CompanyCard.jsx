@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import '../../style/Card.css';
 
-export function CompanyCard({ company }) {
+export function CompanyCard({ company, activities }) {
     const navigate = useNavigate();
 
+    const activityName = activities.find(activity => activity.activity_id === company.work_area)?.name;
+    
     return (
         <div className='card-container'
             onClick={() => {
@@ -13,7 +15,7 @@ export function CompanyCard({ company }) {
             <p>{company.address}</p>
             <p>{company.mail}</p>
             <p>{company.website}</p>
-            <p>{company.work_area}</p>
+            <p>{activityName}</p>
         </div>
     )
 }

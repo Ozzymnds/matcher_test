@@ -78,7 +78,7 @@ export function StudentList() {
             <h1>Lista de estudiantes</h1>
             <div className='grid grid-cols-3 gap-4'>
                 {students.map(student => (
-                    <StudentCard key={student.student_dni} student={student} teacher={teachers} company={companies}/>
+                    <StudentCard key={student.student_dni} student={student} teacher={teachers} company={companies} />
                 ))}
             </div>
             <Link to="/students-create">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getAllCompanies } from "../../api/company.api";
 import { CompanyCard } from "./CompanyCard";
 import { Navigation } from "./CompanyNavigation";
 import axios from "axios";
@@ -7,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export function CompanyList() {
     const [companies, setCompanies] = useState([]);
+    const [activities, setActivities] = useState([]);
 
     const loadCompanies = async () => {
         try {
@@ -31,9 +31,28 @@ export function CompanyList() {
         }
     };
 
+    async function loadActivities() {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (res && res.data) {
+                setActivities(res.data);
+            } else {
+                console.log('Error fetching activities');
+            }
+        } catch (error) {
+            console.error('Error fetching activities:', error);
+        }
+    }
+
     // Con useEffect [] nos aseguramos de que se cargue esta información al renderizar la página
     useEffect(() => {
         loadCompanies();
+        loadActivities();
     }, []);
 
     return (
@@ -42,8 +61,7 @@ export function CompanyList() {
             <h1>Lista de empresas</h1>
             <div className="grid grid-cols-3 gap-3">
                 {companies.map((company) => {
-                    console.log(company.company_cif); // Verifica que los ids sean únicos
-                    return <CompanyCard key={company.company_cif} company={company} />;
+                    return <CompanyCard key={company.company_cif} company={company} activities={activities}/>;
                 })}
             </div>
             <button className="bg-green-500 px-3 py-3 rounded-lg mt3">

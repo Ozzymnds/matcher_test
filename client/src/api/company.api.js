@@ -24,7 +24,6 @@ export const getCompanyById = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Fetched company data:', res.data);
         return res.data; // Ensure to return res.data directly
     } catch (error) {
         console.log('Error fetching company by ID: ', error);

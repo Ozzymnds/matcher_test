@@ -1,14 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createCompany, deleteCompany, updateCompany, getCompanyById } from "../../api/company.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Navigation } from "../../components/company/CompanyNavigation";
+import axios from "axios";
 
 export function CompanyFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
+
+    const [activities, setActivities] = useState([]);
+
+    const dropdownActivities = async () => {
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities', {
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setActivities(res.data);
+        } catch (error) {
+            console.error('Error fetching activities:', error);
+        }
+    }
+
+    useEffect(() => {
+        dropdownActivities();
+    }, []);
 
     const onSubmit = handleSubmit(async (data) => {
         try {
@@ -64,8 +85,17 @@ export function CompanyFormPage() {
                 <input type="text" className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("website", { required: true })} />
                 {errors.website && <span className="text-red-500">El sitio web es obligatorio</span>}
 
+                {/* 
+                <input type="text" className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("work_area", { required: true })} /> */}
+
+
                 <label className="block text-gray-900">Área de trabajo</label>
-                <input type="text" className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("work_area", { required: true })} />
+                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("work_area", { required: true })}>
+                    <option value="">Seleccione una actividad</option>
+                    {activities.map((activity) => (
+                        <option key={activity.activity_id} value={activity.activity_id}>{activity.name}</option>
+                    ))}
+                </select>
                 {errors.work_area && <span className="text-red-500">El área de trabajo es obligatoria</span>}
 
                 <button className="bg-blue-500 text-white px-3 py-3 rounded-lg mt-3 w-full" type="submit" onClick={onSubmit}>
