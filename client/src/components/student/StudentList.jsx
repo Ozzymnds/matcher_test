@@ -13,7 +13,7 @@ export function StudentList() {
     const loadStudents = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -32,7 +32,7 @@ export function StudentList() {
     const loadTeachers = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/teachers/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -51,7 +51,7 @@ export function StudentList() {
     const loadCompanies = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

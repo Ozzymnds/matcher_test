@@ -11,7 +11,7 @@ export function CompanyList() {
     const loadCompanies = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -34,7 +34,7 @@ export function CompanyList() {
     async function loadActivities() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

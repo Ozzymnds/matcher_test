@@ -81,7 +81,7 @@ export function StudentFormPage() {
         if (params.id) {
             try {
                 const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/students/${params.id}/`, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }

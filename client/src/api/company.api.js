@@ -3,7 +3,7 @@ import axios from "axios";
 export const getAllCompanies = async () => {
     try {
         const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -18,7 +18,7 @@ export const getAllCompanies = async () => {
 export const getCompanyById = async (id) => {
     try {
         const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companies/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -33,7 +33,7 @@ export const getCompanyById = async (id) => {
 export const createCompany = async (company) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/companies/', company, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -48,7 +48,7 @@ export const createCompany = async (company) => {
 export const updateCompany = async (id, company) => {
     try {
         const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companies/${id}/`, company, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -63,7 +63,7 @@ export const updateCompany = async (id, company) => {
 export const deleteCompany = async (id) => {
     try {
         const res = await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/companies/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }

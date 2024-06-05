@@ -31,7 +31,7 @@ export function SFeedbackFormPage() {
             let res;
             if (params.id) {
                 res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`, data, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -78,7 +78,7 @@ export function SFeedbackFormPage() {
         if (params.id) {
             try {
                 const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }

@@ -12,7 +12,7 @@ export function TeacherList() {
     async function loadTeachers() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/teachers/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -39,7 +39,7 @@ export function TeacherList() {
     async function loadSchools() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/schools/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

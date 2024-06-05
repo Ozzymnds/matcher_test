@@ -3,7 +3,7 @@ import axios from "axios";
 export const getAllStudents = async () => {
     try {
         const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -66,7 +66,7 @@ export const createStudent = async (student) => {
 export const updateStudent = async (id, student) => {
     try {
         const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, student, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -82,7 +82,7 @@ export const updateStudent = async (id, student) => {
 export const deleteStudent = async (id) => {
     try {
         const res = await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/students/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }

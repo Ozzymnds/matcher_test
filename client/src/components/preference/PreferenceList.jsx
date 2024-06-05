@@ -12,7 +12,7 @@ export function PreferenceList() {
     async function loadPreferences() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/preferences/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -39,7 +39,7 @@ export function PreferenceList() {
     async function loadStudents() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -57,7 +57,7 @@ export function PreferenceList() {
     async function loadActivities() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

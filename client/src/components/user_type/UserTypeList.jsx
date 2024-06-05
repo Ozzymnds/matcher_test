@@ -10,7 +10,7 @@ export function UserTypeList() {
     const loadUserTypes = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/usertypes/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

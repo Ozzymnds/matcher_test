@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getAllSchools = async () => {
     try {
         const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/schools/', {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -18,7 +18,7 @@ export const getAllSchools = async () => {
 export const getSchoolById = async (id) => {
     try {
         const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/schools/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -33,7 +33,7 @@ export const getSchoolById = async (id) => {
 export const createSchool = async (school) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/schools/', school, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -48,7 +48,7 @@ export const createSchool = async (school) => {
 export const updateSchool = async (id, school) => {
     try {
         const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/schools/${id}/`, school, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -63,7 +63,7 @@ export const updateSchool = async (id, school) => {
 export const deleteSchool = async (id) => {
     try {
         const res = await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/schools/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }

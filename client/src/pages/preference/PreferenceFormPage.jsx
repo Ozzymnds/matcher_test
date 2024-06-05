@@ -16,7 +16,7 @@ export function PreferenceFormPage() {
     const dropdownActivities = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -30,7 +30,7 @@ export function PreferenceFormPage() {
     const dropdownStudents = async () => {
         try {
             const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
-                withCredentials: false,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -51,7 +51,7 @@ export function PreferenceFormPage() {
             let res;
             if (params.id) {
                 res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`, data, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -67,7 +67,7 @@ export function PreferenceFormPage() {
                 navigate('/preferences');
             } else {
                 res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/preferences/', data, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -99,7 +99,7 @@ export function PreferenceFormPage() {
         if (params.id) {
             try {
                 const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`, {
-                    withCredentials: false,
+                    withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
                     }

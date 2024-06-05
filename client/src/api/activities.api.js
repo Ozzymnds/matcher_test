@@ -3,7 +3,7 @@ import axios from "axios";
 export const getAllActivities = () => {
     try {
         const res = axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -18,7 +18,7 @@ export const getAllActivities = () => {
 export const getActivityById = async (id) => {
     try {
         const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/activities/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -33,7 +33,7 @@ export const getActivityById = async (id) => {
 export const createActivity = async (activity) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/activities/', activity, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -48,7 +48,7 @@ export const createActivity = async (activity) => {
 export const updateActivity = async (id) => {
     try {
         const res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/activities/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -63,7 +63,7 @@ export const updateActivity = async (id) => {
 export const deleteActivity = async (id) => {
     try {
         const res = await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/activities/${id}/`, {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }

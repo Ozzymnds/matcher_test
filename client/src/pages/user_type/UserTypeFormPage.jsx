@@ -68,7 +68,7 @@ export function UserTypeFormPage() {
             if (params.id) {
                 try {
                     const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/usertypes/${params.id}/`, {
-                        withCredentials: false,
+                        withCredentials: true,
                         headers: {
                             'Content-Type': 'application/json'
                         }
