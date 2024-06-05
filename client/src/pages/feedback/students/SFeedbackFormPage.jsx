@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getAllStudents } from "../../../api/student.api";
 import { Navigation } from "../../../components/feedbacks/students/Navigation";
 
 export function SFeedbackFormPage() {
@@ -11,12 +10,17 @@ export function SFeedbackFormPage() {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [companies, setCompanies] = useState([]);
+    const [students, setStudents] = useState([]);
 
     const dropdownStudents = async () => {
         try {
-            const companies = await getAllStudents();
-            setCompanies(companies);
+            const students = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/students/`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setStudents(students.data);
         } catch (error) {
             console.error('Error fetching companies:', error);
         }
@@ -44,7 +48,7 @@ export function SFeedbackFormPage() {
                         color: 'black'
                     }
                 });
-                navigate('/companyfeedback');
+                navigate('/studentfeedback');
             } else {
                 res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/studentfeedback/', data, {
                     headers: {
@@ -74,7 +78,7 @@ export function SFeedbackFormPage() {
         }
     });
 
-    const loadCompanyFeedback = async () => {
+    const loadStudentFeedback = async () => {
         if (params.id) {
             try {
                 const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`, {
@@ -101,7 +105,7 @@ export function SFeedbackFormPage() {
     };
 
     useEffect(() => {
-        loadCompanyFeedback();
+        loadStudentFeedback();
     }, [params.id, setValue]);
 
     return (
@@ -128,8 +132,8 @@ export function SFeedbackFormPage() {
 
                 <label className="block text-gray-900">Estudiante</label>
                 <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("author", { required: true })}>
-                    <option value="">Seleccione una empresa</option>
-                    {companies.map(student => (
+                    <option value="">Seleccione un estudiante</option>
+                    {students.map(student => (
                         <option key={student.student_dni} value={student.student_dni}>{student.name}</option>
                     ))}
                 </select>

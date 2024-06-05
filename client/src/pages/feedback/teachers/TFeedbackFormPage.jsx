@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getAllTeachers } from "../../../api/teacher.api";
 import { Navigation } from "../../../components/feedbacks/teachers/Navigation";
 
 export function TFeedbackFormPage() {
@@ -15,8 +14,13 @@ export function TFeedbackFormPage() {
 
     const dropdownTeachers = async () => {
         try {
-            const res = await getAllTeachers();
-            setTeachers(res);
+            const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/teachers/`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setTeachers(res.data);
         } catch (error) {
             console.error('Error fetching companies:', error);
         }

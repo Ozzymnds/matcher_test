@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getAllSchools } from "../../api/school.api";
 import { Navigation } from "../../components/teacher/TeacherNavigation";
 
 export function TeacherFormPage() {
@@ -14,8 +13,13 @@ export function TeacherFormPage() {
 
     const dropdown = async () => {
         try {
-            const dropdownSchools = await getAllSchools();
-            setSchools(dropdownSchools);
+            const dropdownSchools = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/schools/`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setSchools(dropdownSchools.data);
         } catch (error) {
             console.error('Error fetching schools:', error);
         }

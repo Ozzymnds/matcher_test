@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { deleteStudent } from "../../api/student.api";
-import { getAllCompanies } from "../../api/company.api";
-import { getAllTeachers } from "../../api/teacher.api";
 import { Navigation } from "../../components/student/StudentNavigation";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -17,8 +14,13 @@ export function StudentFormPage() {
 
     const dropdownTeachers = async () => {
         try {
-            const teachers = await getAllTeachers();
-            setTeachers(teachers);
+            const teachers = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/teachers/`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setTeachers(teachers.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -87,13 +89,13 @@ export function StudentFormPage() {
                     }
                 });
                 if (res && res.data) {
-                    const { student_dni, name, last_name, address, school_mail, teacher } = res.data;
+                    const { student_dni, name, last_name, address, school_mail, teacher_id } = res.data;
                     setValue('student_dni', student_dni);
                     setValue('name', name);
                     setValue('last_name', last_name);
                     setValue('address', address);
                     setValue('school_mail', school_mail);
-                    setValue('teacher_id', teacher);
+                    setValue('teacher_id', teacher_id);
                 } else {
                     console.log('No data found for the given student ID');
                 }
@@ -180,7 +182,12 @@ export function StudentFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this student?');
                             if (accepted) {
-                                await deleteStudent(params.id);
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/students/${params.id}/`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
                                 toast.success('Student deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

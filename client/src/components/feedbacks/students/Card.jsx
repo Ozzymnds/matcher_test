@@ -4,7 +4,7 @@ import '../../../style/Card.css';
 export function Card({ studentfeedback, student }) {
     const navigate = useNavigate();
 
-    const studentName = student.find(student => student.student_id === studentfeedback.author)?.name
+    const studentName = student.find(student => student.student_dni === studentfeedback.author)?.name
 
     return (
         <div className='card-container'

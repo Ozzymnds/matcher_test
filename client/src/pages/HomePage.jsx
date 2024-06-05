@@ -28,9 +28,6 @@ export function HomePage() {
                         <Link to="/activities" className="homepage-card">Actividades</Link>
                     </li>
                     <li>
-                        <Link to="/usertypes" className="homepage-card">Tipos de Usuarios</Link>
-                    </li>
-                    <li>
                         <Link to="/companyfeedback" className="homepage-card">Feedback de empresas sobre alumnos</Link>
                     </li>
                     <li>

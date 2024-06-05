@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createCompany, deleteCompany, updateCompany, getCompanyById } from "../../api/company.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Navigation } from "../../components/company/CompanyNavigation";
@@ -33,28 +32,70 @@ export function CompanyFormPage() {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
+            let res;
             if (params.id) {
-                await updateCompany(params.id, data);
+                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.id}/`, data, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                toast.success('Student updated', {
+                    duration: 3000,
+                    position: 'bottom-right',
+                    style: {
+                        background: 'green',
+                        color: 'white'
+                    }
+                });
             } else {
-                await createCompany(data);
+                res = await axios.post(`http://127.0.0.1:8000/funciones/api/v1/companies/`, data, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                toast.success('Student created', {
+                    duration: 3000,
+                    position: 'bottom-right',
+                    style: {
+                        background: 'blue',
+                        color: 'white'
+                    }
+                });
             }
-            navigate("/companies");
+            navigate('/companies');
         } catch (error) {
-            console.log(error);
+            toast.error(`Error: ${error.message}`, {
+                duration: 3000,
+                position: 'bottom-right',
+                style: {
+                    background: 'red',
+                    color: 'white'
+                }
+            });
         }
     });
 
     useEffect(() => {
-        if (params.id) {
+        if (params.company_cif) {
             async function loadCompany() {
                 try {
-                    const company = await getCompanyById(params.id);
-                    setValue("name", company.name);
-                    setValue("company_cif", company.company_cif);
-                    setValue("address", company.address);
-                    setValue("mail", company.mail);
-                    setValue("website", company.website);
-                    setValue("work_area", company.work_area);
+                    const company = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.company_cif}/`, {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    if (company && company.data) {
+                        const { company_cif, name, address, mail, website, work_area} = company.data;
+                        setValue("name", name);
+                        setValue("company_cif", company_cif);
+                        setValue("address", address);
+                        setValue("mail", mail);
+                        setValue("website", website);
+                        setValue("work_area", work_area);
+                    } else {
+                        console.log('No data found for the given company CIF');
+                    }
                 } catch (error) {
                     console.log(error);
                 }
@@ -109,7 +150,12 @@ export function CompanyFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this item?');
                             if (accepted) {
-                                await deleteCompany(params.id);
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.id}/`, data, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
                                 toast.success('Company deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

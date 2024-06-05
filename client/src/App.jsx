@@ -20,9 +20,6 @@ import { TeacherFormPage } from './pages/teacher/TeacherFormPage';
 import { ActivityPage } from './pages/activity/ActivityPage';
 import { ActivityFormPage } from './pages/activity/ActivityFormPage';
 
-import { UserTypePage } from './pages/user_type/UserTypePage';
-import { UserTypeFormPage } from './pages/user_type/UserTypeFormPage';
-
 import { PreferencePage } from './pages/preference/PreferencePage';
 import { PreferenceFormPage } from './pages/preference/PreferenceFormPage';
 
@@ -64,10 +61,6 @@ function App() {
                     <Route path='/activities-create' element={<ActivityFormPage />} />
                     <Route path='/activities/:id' element={<ActivityFormPage />} />
 
-                    <Route path='/usertypes' element={<UserTypePage />} />
-                    <Route path='/usertypes-create' element={<UserTypeFormPage />} />
-                    <Route path='/usertypes/:id' element={<UserTypeFormPage />} />
-
                     <Route path='/preferences' element={<PreferencePage />} />
                     <Route path='/preferences-create' element={<PreferenceFormPage />} />
                     <Route path='/preferences/:id' element={<PreferenceFormPage />} />
@@ -83,7 +76,7 @@ function App() {
                     <Route path='/teacherfeedback' element={<TFeedbackPage />} />
                     <Route path='/teacherfeedback-create' element={<TFeedbackFormPage />} />
                     <Route path='/teacherfeedback/:id' element={<TFeedbackFormPage />} />
-                    
+
                 </Routes>
                 <Toaster />
             </div>

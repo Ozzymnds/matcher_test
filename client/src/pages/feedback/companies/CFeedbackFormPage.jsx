@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getAllCompanies } from "../../../api/company.api";
 import { Navigation } from "../../../components/company/CompanyNavigation";
 
 export function CFeedbackFormPage() {
@@ -15,8 +14,13 @@ export function CFeedbackFormPage() {
 
     const dropdownCompanies = async () => {
         try {
-            const companies = await getAllCompanies();
-            setCompanies(companies);
+            const companies = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companies/`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setCompanies(companies.data);
         } catch (error) {
             console.error('Error fetching companies:', error);
         }

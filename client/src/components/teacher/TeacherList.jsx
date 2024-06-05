@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getAllTeachers } from "../../api/teacher.api";
 import { TeacherCard } from "./TeacherCard";
 import { Navigation } from "./TeacherNavigation";
 import { Link } from "react-router-dom";

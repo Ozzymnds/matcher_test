@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { createSchool, deleteSchool, updateSchool } from "../../api/school.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { Navigation } from "../../components/school/SchoolNavigation";
 import { toast } from "react-hot-toast";
@@ -14,23 +13,32 @@ export function SchoolFormPage() {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
+            let res;
             if (params.id) {
-                await updateSchool(params.id, data);
-                toast.success('School updated successfully', {
-                    duration: 3000,
-                    position: 'bottom-right',
-                    style: {
-                        background: 'blue',
-                        color: 'white'
+                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/schools/${params.id}/`, data, {
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
                 });
-            } else {
-                await createSchool(data);
-                toast.success('School created successfully', {
+                toast.success('Student updated', {
                     duration: 3000,
                     position: 'bottom-right',
                     style: {
                         background: 'green',
+                        color: 'white'
+                    }
+                });
+            } else {
+                res = await axios.post(`http://127.0.0.1:8000/funciones/api/v1/schools/`, data, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                toast.success('Student created', {
+                    duration: 3000,
+                    position: 'bottom-right',
+                    style: {
+                        background: 'blue',
                         color: 'white'
                     }
                 });
@@ -47,6 +55,7 @@ export function SchoolFormPage() {
             });
         }
     });
+
 
     useEffect(() => {
         async function loadSchool() {
@@ -108,7 +117,12 @@ export function SchoolFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this school?');
                             if (accepted) {
-                                await deleteSchool(params.id);
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, data, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
                                 toast.success('School deleted successfully', {
                                     duration: 3000,
                                     position: 'bottom-right',

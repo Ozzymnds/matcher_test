@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { deleteActivity } from "../../api/activities.api";
 import { Navigation } from "../../components/activity/ActivityNavigation";
 
 export function ActivityFormPage() {
@@ -111,7 +110,12 @@ export function ActivityFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
-                                await deleteActivity(params.id);
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, data, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
                                 toast.success('Actividad eliminada', {
                                     duration: 3000,
                                     position: 'bottom-right',
