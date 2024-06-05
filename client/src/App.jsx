@@ -22,15 +22,17 @@ import { ActivityFormPage } from './pages/activity/ActivityFormPage';
 import { UserTypePage } from './pages/user_type/UserTypePage';
 import { UserTypeFormPage } from './pages/user_type/UserTypeFormPage';
 
-import { UserPage } from './pages/user/UserPage';
-import { UserFormPage } from './pages/user/UserFormPage';
-
-import { FeedbackPage } from './pages/feedback/FeedbackPage';
-import { FeedbackFormPage } from './pages/feedback/FeedbackFormPage';
-
 import { PreferencePage } from './pages/preference/PreferencePage';
 import { PreferenceFormPage } from './pages/preference/PreferenceFormPage';
 
+import { CFeedbackPage } from './pages/feedback/companies/CFeedbackPage';
+import { CFeedbackFormPage } from './pages/feedback/companies/CFeedbackFormPage';
+
+import { SFeedbackPage } from './pages/feedback/students/SFeedbackPage';
+import { SFeedbackFormPage } from './pages/feedback/students/SFeedbackFormPage';
+
+import { TFeedbackPage } from './pages/feedback/teachers/TFeedbackPage';
+import { TFeedbackFormPage } from './pages/feedback/teachers/TFeedbackFormPage';
 
 function App() {
     return (
@@ -64,17 +66,22 @@ function App() {
                     <Route path='/usertypes-create' element={<UserTypeFormPage />} />
                     <Route path='/usertypes/:id' element={<UserTypeFormPage />} />
 
-                    <Route path='/users' element={<UserPage />} />
-                    <Route path='/users-create' element={<UserFormPage />} />
-                    <Route path='/users/:id' element={<UserFormPage />} />
-
-                    <Route path='/feedback' element={<FeedbackPage />} />
-                    <Route path='/feedback-create' element={<FeedbackFormPage />} />
-                    <Route path='/feedback/:id' element={<FeedbackFormPage />} />
-
                     <Route path='/preferences' element={<PreferencePage />} />
                     <Route path='/preferences-create' element={<PreferenceFormPage />} />
                     <Route path='/preferences/:id' element={<PreferenceFormPage />} />
+
+                    <Route path='/companyfeedback' element={<CFeedbackPage />} />
+                    <Route path='/companyfeedback-create' element={<CFeedbackFormPage />} />
+                    <Route path='/companyfeedback/:id' element={<CFeedbackFormPage />} />
+
+                    <Route path='/studentfeedback' element={<SFeedbackPage />} />
+                    <Route path='/studentfeedback-create' element={<SFeedbackFormPage />} />
+                    <Route path='/studentfeedback/:id' element={<SFeedbackFormPage />} />
+
+                    <Route path='/teacherfeedback' element={<TFeedbackPage />} />
+                    <Route path='/teacherfeedback-create' element={<TFeedbackFormPage />} />
+                    <Route path='/teacherfeedback/:id' element={<TFeedbackFormPage />} />
+                    
                 </Routes>
                 <Toaster />
             </div>

@@ -8,7 +8,6 @@ export const getAllStudents = async () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res);
         return res.data;
     } catch (error) {
         console.log('Error fetching activities: ', error);

@@ -8,7 +8,6 @@ export const getAllCompanies = async () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Fetched companies data:', res.data);
         return res.data; // Ensure to return res.data directly
     } catch (error) {
         console.log('Error fetching companies: ', error);
@@ -39,7 +38,6 @@ export const createCompany = async (company) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Created company data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error creating company: ', error);
@@ -55,7 +53,6 @@ export const updateCompany = async (id, company) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Updated company data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error updating company: ', error);
@@ -71,7 +68,6 @@ export const deleteCompany = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Deleted company data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error deleting company: ', error);

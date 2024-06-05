@@ -27,10 +27,13 @@ export function HomePage() {
                         <Link to="/usertypes" className="homepage-card">Tipos de Usuarios</Link>
                     </li>
                     <li>
-                        <Link to="/users" className="homepage-card">Usuarios</Link>
+                        <Link to="/companyfeedback" className="homepage-card">Feedback de empresas sobre alumnos</Link>
                     </li>
                     <li>
-                        <Link to="/feedback" className="homepage-card">Feedback</Link>
+                        <Link to="/studentfeedback" className="homepage-card">Feedback de alumnos sobre empresas</Link>
+                    </li>
+                    <li>
+                        <Link to="/teacherfeedback" className="homepage-card">Feedback de profesores sobre tutorias/visitas</Link>
                     </li>
                     <li>
                         <Link to="/preferences" className="homepage-card">Preferencias</Link>

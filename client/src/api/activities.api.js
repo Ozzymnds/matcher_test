@@ -8,7 +8,6 @@ export const getAllActivities = () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res);
         return res.data;
     } catch (error) {
         console.log('Error fetching activities: ', error);
@@ -24,7 +23,6 @@ export const getActivityById = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
         return res;
     } catch (error) {
         console.log('Error fetching activities: ', error);
@@ -40,7 +38,6 @@ export const createActivity = async (activity) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
         return res;
     } catch (error) {
         console.log('Error fetching activities: ', error);
@@ -56,7 +53,6 @@ export const updateActivity = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
         return res;
     } catch (error) {
         console.log('Error fetching activities: ', error);
@@ -72,7 +68,6 @@ export const deleteActivity = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res.data);
         return res;
     } catch (error) {
         console.log('Error fetching activities: ', error);

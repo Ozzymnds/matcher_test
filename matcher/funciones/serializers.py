@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import School, Company, Activity, Feedback, Preference, Student, Teacher, User, UserType
+from .models import School, Company, Activity, Preference, Student, Teacher, UserType, TeacherFeedback, User, CompanyFeedback, StudentFeedback
 
 
 class SchoolSerializer(serializers.ModelSerializer):
@@ -11,12 +11,6 @@ class SchoolSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = '__all__'
-
-
-class FeedbackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Feedback
         fields = '__all__'
 
 
@@ -44,13 +38,31 @@ class TeacherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class UserTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserType
+        fields = '__all__'
+
+
+class TeacherFeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeacherFeedback
+        fields = '__all__'
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
 
 
-class UserTypeSerializer(serializers.ModelSerializer):
+class CompanyFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserType
+        model = CompanyFeedback
+        fields = '__all__'
+
+
+class StudentFeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentFeedback
         fields = '__all__'

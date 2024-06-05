@@ -29,7 +29,6 @@ export function StudentFormPage() {
     }, []);
 
     const onSubmit = handleSubmit(async (data) => {
-        console.log('Submitting data:', data);
         try {
             let res;
             if (params.id) {
@@ -55,7 +54,6 @@ export function StudentFormPage() {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(res);
                 toast.success('Student created', {
                     duration: 3000,
                     position: 'bottom-right',

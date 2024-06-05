@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, User
 from django.db import models
 
 
@@ -21,6 +21,9 @@ class Activity(models.Model):
     activity_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
 
+    def __str__(self):
+        return self.name
+
 
 class UserType(models.Model):
     id_type = models.AutoField(primary_key=True)
@@ -28,14 +31,6 @@ class UserType(models.Model):
 
     def __str__(self):
         return self.type_name
-
-
-
-class User(models.Model):
-    id_user = models.AutoField(primary_key=True)
-    id_type = models.ForeignKey(UserType, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=255, null=False)
-    user_password = models.CharField(max_length=255, null=False)
 
 
 class Company(models.Model):
@@ -66,11 +61,44 @@ class Preference(models.Model):
         unique_together = (('student', 'activity'))
 
 
-class Feedback(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+class StudentFeedback(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    author = models.ForeignKey(Student, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    strengths = models.TextField(null=True, blank=True)
-    weaknesses = models.TextField(null=True, blank=True)
 
     class Meta:
-        unique_together = (('student', 'company'))
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title
+
+
+class TeacherFeedback(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    author = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title
+
+
+class CompanyFeedback(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    author = models.ForeignKey(Company, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title

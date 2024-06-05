@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'coreapi',
     'funciones',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -148,4 +149,8 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173',
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }

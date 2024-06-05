@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../../style/Navigation.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import "../../../style/Navigation.css";
 export function Navigation() {
     return (
         <div className="navigation-container">
@@ -10,8 +10,8 @@ export function Navigation() {
                 </Link>
             </div>
             <div className="navigation-item">
-                <Link to="/feedback" className="navigation-link">
-                    <h2>Feedback</h2>
+                <Link to="/teacherfeedback" className="navigation-link">
+                    <h2>Profesores</h2>
                 </Link>
             </div>
         </div>

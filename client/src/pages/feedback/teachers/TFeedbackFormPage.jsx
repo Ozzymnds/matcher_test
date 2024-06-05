@@ -3,46 +3,34 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getAllCompanies } from "../../api/company.api";
-import { getAllStudents } from "../../api/student.api";
-import { Navigation } from "../../components/feedback/FeedbackNavigation";
+import { getAllTeachers } from "../../../api/teacher.api";
+import { Navigation } from "../../../components/feedbacks/teachers/Navigation";
 
-export function FeedbackFormPage() {
+export function TFeedbackFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
 
-    const [companies, setCompanies] = useState([]);
-    const [students, setStudents] = useState([]);
+    const [teachers, setTeachers] = useState([]);
 
-    const dropdownCompanies = async () => {
+    const dropdownTeachers = async () => {
         try {
-            const companies = await getAllCompanies();
-            setCompanies(companies);
+            const res = await getAllTeachers();
+            setTeachers(res);
         } catch (error) {
             console.error('Error fetching companies:', error);
         }
     };
 
-    const dropdownStudents = async () => {
-        try {
-            const students = await getAllStudents();
-            setStudents(students);
-        } catch (error) {
-            console.error('Error fetching students:', error);
-        }
-    };
-
     useEffect(() => {
-        dropdownCompanies();
-        dropdownStudents();
+        dropdownTeachers();
     }, []);
 
     const onSubmit = handleSubmit(async (data) => {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/teacherfeedback/${params.id}/`, data, {
                     withCredentials: false,
                     headers: {
                         'Content-Type': 'application/json'
@@ -56,9 +44,9 @@ export function FeedbackFormPage() {
                         color: 'black'
                     }
                 });
-                navigate('/feedback');
+                navigate('/teacherfeedback');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/feedback/', data, {
+                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/teacherfeedback/', data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -72,7 +60,7 @@ export function FeedbackFormPage() {
                     }
                 });
             }
-            navigate('/feedback');
+            navigate('/teacherfeedback');
         } catch (e) {
             console.error('Error saving:', e.response?.data || e.message);
             toast.error('Failed to save', {
@@ -86,10 +74,10 @@ export function FeedbackFormPage() {
         }
     });
 
-    const loadFeedback = async () => {
+    const loadTeacherFeedback = async () => {
         if (params.id) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`, {
+                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/teacherfeedback/${params.id}/`, {
                     withCredentials: false,
                     headers: {
                         'Content-Type': 'application/json'
@@ -98,10 +86,11 @@ export function FeedbackFormPage() {
                 if (res && res.data) {
                     const { data } = res;
                     setValue('id', data.id);
-                    setValue('company', data.company_id);
-                    setValue('student', data.student_id);
-                    setValue('strengths', data.strengths);
-                    setValue('weaknesses', data.weaknesses);
+                    setValue('title', data.title);
+                    setValue('updated_on', data.updated_on);
+                    setValue('content', data.content);
+                    setValue('created_on', data.created_on);
+                    setValue('author', data.author);
                 } else {
                     console.log('Error fetching feedback');
                 }
@@ -112,7 +101,7 @@ export function FeedbackFormPage() {
     };
 
     useEffect(() => {
-        loadFeedback();
+        loadTeacherFeedback();
     }, [params.id, setValue]);
 
     return (
@@ -121,39 +110,30 @@ export function FeedbackFormPage() {
             <form onSubmit={onSubmit} className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mt-10">
                 <h1 className="text-2xl font-semibold text-blue-700 mb-6">{params.id ? 'Editar Feedback' : 'Crear Feedback'}</h1>
 
-                <label className="block text-gray-900">Pros</label>
+                <label className="block text-gray-900">Titulo</label>
                 <textarea
                     type="text"
                     className="bg-blue-100 p-4 text-lg rounded-lg block w-full mb-3 text-gray-900"
-                    {...register("strengths", { required: true })}
+                    {...register("title", { required: true })}
                 />
-                {errors.strengths && <span className="text-red-500">Obligatorio</span>}
+                {errors.title && <span className="text-red-500">Obligatorio</span>}
 
-                <label className="block text-gray-900">Contras</label>
+                <label className="block text-gray-900">Reseña</label>
                 <textarea
                     type="text"
                     className="bg-blue-100 p-4 text-lg rounded-lg block w-full mb-3 text-gray-900"
-                    {...register("weaknesses", { required: true })}
+                    {...register("content", { required: true })}
                 />
-                {errors.weaknesses && <span className="text-red-500">Obligatorio</span>}
+                {errors.content && <span className="text-red-500">Obligatorio</span>}
 
-                <label className="block text-gray-900">Student</label>
-                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("student", { required: true })}>
-                    <option value="">Seleccione un estudiante</option>
-                    {students.map(student => (
-                        <option key={student.student_dni} value={student.student_dni}>{student.name}</option>
-                    ))}
-                </select>
-                {errors.student && <span className="text-red-500">Obligatorio</span>}
-
-                <label className="block text-gray-900">Company</label>
-                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("company", { required: true })}>
+                <label className="block text-gray-900">Profesor</label>
+                <select className="bg-blue-100 p-3 rounded-lg block w-full mb-3 text-gray-900" {...register("author", { required: true })}>
                     <option value="">Seleccione una empresa</option>
-                    {companies.map(company => (
-                        <option key={company.company_cif} value={company.company_cif}>{company.name}</option>
+                    {teachers.map(teacher => (
+                        <option key={teacher.teacher_dni} value={teacher.teacher_dni}>{teacher.name}</option>
                     ))}
                 </select>
-                {errors.company && <span className="text-red-500">Obligatorio</span>}
+                {errors.author && <span className="text-red-500">Obligatorio</span>}
 
                 <button className="bg-blue-500 text-white px-3 py-3 rounded-lg mt-3 w-full" type="submit">Guardar</button>
             </form>
@@ -165,7 +145,7 @@ export function FeedbackFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/feedback/${params.id}/`);
+                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/teacherfeedback/${params.id}/`);
                                 toast.success('Deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',
@@ -174,7 +154,7 @@ export function FeedbackFormPage() {
                                         color: 'black'
                                     }
                                 });
-                                navigate('/feedback');
+                                navigate('/teacherfeedback');
                             }
                         }}
                     >Eliminar</button>

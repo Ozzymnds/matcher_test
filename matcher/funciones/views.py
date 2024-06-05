@@ -2,8 +2,10 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import School, Company, Activity, Feedback, Preference, Student, Teacher, User, UserType
-from .serializers import SchoolSerializer, CompanySerializer, ActivitySerializer, FeedbackSerializer, PreferenceSerializer, StudentSerializer, TeacherSerializer, UserSerializer, UserTypeSerializer
+from .models import School, Company, Activity, Preference, Student, Teacher, User, UserType, TeacherFeedback, StudentFeedback, CompanyFeedback
+from .serializers import SchoolSerializer, CompanySerializer, ActivitySerializer, PreferenceSerializer, StudentSerializer, TeacherSerializer, UserSerializer, UserTypeSerializer, TeacherFeedbackSerializer, StudentFeedbackSerializer, CompanyFeedbackSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class SchoolView(viewsets.ModelViewSet):
@@ -19,11 +21,6 @@ class CompanyView(viewsets.ModelViewSet):
 class ActivityView(viewsets.ModelViewSet):
     serializer_class = ActivitySerializer
     queryset = Activity.objects.all()
-
-
-class FeedbackView(viewsets.ModelViewSet):
-    serializer_class = FeedbackSerializer
-    queryset = Feedback.objects.all()
 
 
 class PreferenceView(viewsets.ModelViewSet):
@@ -49,6 +46,21 @@ class StudentView(viewsets.ModelViewSet):
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
     queryset = Teacher.objects.all()
+
+
+class TeacherFeedbackView(viewsets.ModelViewSet):
+    serializer_class = TeacherFeedbackSerializer
+    queryset = TeacherFeedback.objects.all()
+
+
+class CompanyFeedbackView(viewsets.ModelViewSet):
+    serializer_class = CompanyFeedbackSerializer
+    queryset = CompanyFeedback.objects.all()
+
+
+class StudentFeedbackView(viewsets.ModelViewSet):
+    serializer_class = StudentFeedbackSerializer
+    queryset = StudentFeedback.objects.all()
 
 
 class MatcherView(APIView):
@@ -84,3 +96,15 @@ class MatcherView(APIView):
                 })
 
         return Response(matches, status=status.HTTP_200_OK)
+
+
+class LoginView(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        content = {
+            'user': str(request.user),
+            'auth': str(request.auth),
+        }
+        return Response(content)

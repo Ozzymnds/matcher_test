@@ -8,7 +8,6 @@ export const getAllSchools = async () => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Fetched schools data:', res.data);
         return res.data; // Ensure to return res.data directly
     } catch (error) {
         console.log('Error fetching schools: ', error);
@@ -39,7 +38,6 @@ export const createSchool = async (school) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Created school data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error creating schools: ', error);
@@ -55,7 +53,6 @@ export const updateSchool = async (id, school) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Updated school data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error updating schools: ', error);
@@ -71,7 +68,6 @@ export const deleteSchool = async (id) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log('Deleted school data:', res.data);
         return res.data;
     } catch (error) {
         console.log('Error deleting schools: ', error);
