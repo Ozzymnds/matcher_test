@@ -1,12 +1,16 @@
 import '../style/HomePage.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../components/auth/logs';
 
 export function HomePage() {
     return (
         <div className="homepage-container">
             <h1>Bienvenido a la Página Principal</h1>
             <nav className="homepage-nav">
+                <ul>
+                    <li><button onClick={logout}>Logout</button></li>
+                </ul>
                 <ul className="homepage-grid">
                     <li>
                         <Link to="/schools" className="homepage-card">Escuelas</Link>

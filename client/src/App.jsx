@@ -6,6 +6,7 @@ import { SchoolPage } from './pages/school/SchoolPage';
 import { SchoolFormPage } from './pages/school/SchoolFormPage';
 
 import { HomePage } from './pages/HomePage';
+import { LoginForm } from './pages/login/LoginPage';
 
 import { StudentPage } from './pages/student/StudentPage';
 import { StudentFormPage } from './pages/student/StudentFormPage';
@@ -39,7 +40,8 @@ function App() {
         <BrowserRouter>
             <div>
                 <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
+                    <Route path="/" element={<Navigate to="/login" />} />
+                    <Route path="/login" element={<LoginForm />} />
                     <Route path="/home" element={<HomePage />} />
 
                     <Route path="/schools" element={<SchoolPage />} />

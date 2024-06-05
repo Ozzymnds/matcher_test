@@ -71,16 +71,12 @@ class MatcherView(APIView):
         for preference in preferences:
             student = preference.student
             activity = preference.activity
-
-            # Buscar empresas que coincidan con el área de trabajo
             matching_companies = Company.objects.filter(
                 work_area=activity
             )
 
             if matching_companies.exists():
                 company = matching_companies.first()
-                # Asignar la primera empresa coincidente al estudiante
-                # Assuming `company` is a ForeignKey field in the student model
                 student.company = company
                 student.save()
 
