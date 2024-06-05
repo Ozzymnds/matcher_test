@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, User
+
 from django.db import models
 
 
@@ -23,14 +23,6 @@ class Activity(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class UserType(models.Model):
-    id_type = models.AutoField(primary_key=True)
-    type_name = models.CharField(max_length=255, null=False)
-
-    def __str__(self):
-        return self.type_name
 
 
 class Company(models.Model):

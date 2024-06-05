@@ -61,6 +61,13 @@ MIDDLEWARE = [
 ]
 
 SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = 'Strict'
+SET_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+# AUTH_USER_MODEL = 'authenticate.CustomUser'
 
 ROOT_URLCONF = 'matcher.urls'
 
@@ -85,13 +92,6 @@ WSGI_APPLICATION = 'matcher.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         conn_max_age=600,
-#         conn_health_checks=True,
-#     ),
-# }
 
 DATABASES = {
     'default': {

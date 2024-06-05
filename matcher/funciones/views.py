@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import School, Company, Activity, Preference, Student, Teacher, User, UserType, TeacherFeedback, StudentFeedback, CompanyFeedback
-from .serializers import SchoolSerializer, CompanySerializer, ActivitySerializer, PreferenceSerializer, StudentSerializer, TeacherSerializer, UserSerializer, UserTypeSerializer, TeacherFeedbackSerializer, StudentFeedbackSerializer, CompanyFeedbackSerializer
+from .models import School, Company, Activity, Preference, Student, Teacher, TeacherFeedback, StudentFeedback, CompanyFeedback
+from .serializers import SchoolSerializer, CompanySerializer, ActivitySerializer, PreferenceSerializer, StudentSerializer, TeacherSerializer, TeacherFeedbackSerializer, StudentFeedbackSerializer, CompanyFeedbackSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -26,16 +26,6 @@ class ActivityView(viewsets.ModelViewSet):
 class PreferenceView(viewsets.ModelViewSet):
     serializer_class = PreferenceSerializer
     queryset = Preference.objects.all()
-
-
-class UserView(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-
-
-class UserTypeView(viewsets.ModelViewSet):
-    serializer_class = UserTypeSerializer
-    queryset = UserType.objects.all()
 
 
 class StudentView(viewsets.ModelViewSet):

@@ -8,6 +8,7 @@ export const login = async ({ username, password, handleShow }) => {
         }, {
             withCredentials: true,  // Ensure cookies are sent with the request
             headers: {
+                // "X-CSRFToken": Cookies.get('csrftoken'),
                 'Content-Type': 'application/json'
             }
         });
