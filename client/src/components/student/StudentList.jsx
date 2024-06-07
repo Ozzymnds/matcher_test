@@ -8,6 +8,24 @@ export function StudentList() {
     const [students, setStudents] = useState([]);
     const [teachers, setTeachers] = useState([]);
     const [companies, setCompanies] = useState([]);
+    const [matches, setMatches] = useState([]);
+
+    useEffect(() => {
+        const fetchMatches = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/funciones/match/');
+                setMatches(response.data);
+            } catch (error) {
+                console.error('Error fetching matches:', error);
+            }
+        };
+
+        fetchMatches();
+
+        const interval = setInterval(fetchMatches, 100);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const loadStudents = async () => {
         try {

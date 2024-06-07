@@ -32,14 +32,19 @@ import { SFeedbackFormPage } from './pages/feedback/students/SFeedbackFormPage';
 import { TFeedbackPage } from './pages/feedback/teachers/TFeedbackPage';
 import { TFeedbackFormPage } from './pages/feedback/teachers/TFeedbackFormPage';
 
+import ProtectedRoute from './pages/ProtectedRoute';
+import { MatchView } from './matchView'
+
+
 function App() {
     return (
         <BrowserRouter>
             <div>
                 <Routes>
+                    <Route path="/match" element={<MatchView />} />
                     <Route path="/" element={<Navigate to="/login" />} />
                     <Route path="/login" element={<LoginForm />} />
-                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/home" element={<ProtectedRoute element={<HomePage />} />} />
 
                     <Route path="/schools" element={<SchoolPage />} />
                     <Route path="/schools-create" element={<SchoolFormPage />} />
@@ -76,12 +81,11 @@ function App() {
                     <Route path='/teacherfeedback' element={<TFeedbackPage />} />
                     <Route path='/teacherfeedback-create' element={<TFeedbackFormPage />} />
                     <Route path='/teacherfeedback/:id' element={<TFeedbackFormPage />} />
-
                 </Routes>
                 <Toaster />
             </div>
         </BrowserRouter>
-    )
+    );
 }
 
 export default App;

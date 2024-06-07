@@ -82,15 +82,3 @@ class MatcherView(APIView):
                 })
 
         return Response(matches, status=status.HTTP_200_OK)
-
-
-class LoginView(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, format=None):
-        content = {
-            'user': str(request.user),
-            'auth': str(request.auth),
-        }
-        return Response(content)
