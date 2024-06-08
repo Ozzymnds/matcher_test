@@ -1,2 +1,0 @@
-docker compose exec -it matcher bash
-docker compose exec -it client bash

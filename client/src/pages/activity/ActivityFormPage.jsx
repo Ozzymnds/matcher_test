@@ -16,7 +16,7 @@ export function ActivityFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/activities/${params.id}/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -32,7 +32,7 @@ export function ActivityFormPage() {
                 });
                 navigate('/activities');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/activities/', data, {
+                res = await axios.post('http://127.0.0.1:80/api/funciones/api/v1/activities/', data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -65,7 +65,7 @@ export function ActivityFormPage() {
         async function loadActivity() {
             if (params.id) {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, {
+                    const response = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/activities/${params.id}/`, {
                         withCredentials: true,
                         headers: {
                             'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ export function ActivityFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, data, {
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/activities/${params.id}/`, data, {
                                     withCredentials: true,
                                     headers: {
                                         'Content-Type': 'application/json'

@@ -37,7 +37,7 @@ export const login = async ({ username, password, handleShow }) => {
 export const logout = async () => {
     try {
         const csrftoken = Cookies.get("csrftoken");
-        const response = await axios.post('http://127.0.0.1:8000/auth/logout/', { withCredentials: true }, {
+        const response = await axios.post('http://127.0.0.1:80/api/auth/logout/', { withCredentials: true }, {
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Content-Type': 'application/json'

@@ -9,7 +9,7 @@ export function ActivityList() {
 
     const loadActivities = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/activities/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'

@@ -10,7 +10,7 @@ export function CompanyList() {
 
     const loadCompanies = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/companies/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export function CompanyList() {
 
     async function loadActivities() {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/activities/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export function CompanyList() {
             <h1>Lista de empresas</h1>
             <div className="grid grid-cols-3 gap-3">
                 {companies.map((company) => {
-                    return <CompanyCard key={company.company_cif} company={company} activities={activities}/>;
+                    return <CompanyCard key={company.company_cif} company={company} activities={activities} />;
                 })}
             </div>
             <button className="bg-green-500 px-3 py-3 rounded-lg mt3">

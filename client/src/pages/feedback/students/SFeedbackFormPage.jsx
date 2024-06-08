@@ -14,7 +14,7 @@ export function SFeedbackFormPage() {
 
     const dropdownStudents = async () => {
         try {
-            const students = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/students/`, {
+            const students = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/students/`, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export function SFeedbackFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/studentfeedback/${params.id}/`, data, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export function SFeedbackFormPage() {
                 });
                 navigate('/studentfeedback');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/studentfeedback/', data, {
+                res = await axios.post('http://127.0.0.1:80/api/funciones/api/v1/studentfeedback/', data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -81,7 +81,7 @@ export function SFeedbackFormPage() {
     const loadStudentFeedback = async () => {
         if (params.id) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`, {
+                const res = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/studentfeedback/${params.id}/`, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ export function SFeedbackFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/studentfeedback/${params.id}/`);
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/studentfeedback/${params.id}/`);
                                 toast.success('Deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

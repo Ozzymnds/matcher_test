@@ -14,7 +14,7 @@ export function CompanyFormPage() {
 
     const dropdownActivities = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/activities', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,12 +34,12 @@ export function CompanyFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/companies/${params.id}/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-                toast.success('Student updated', {
+                toast.success('Updated', {
                     duration: 3000,
                     position: 'bottom-right',
                     style: {
@@ -48,12 +48,12 @@ export function CompanyFormPage() {
                     }
                 });
             } else {
-                res = await axios.post(`http://127.0.0.1:8000/funciones/api/v1/companies/`, data, {
+                res = await axios.post(`http://127.0.0.1:80/api/funciones/api/v1/companies/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-                toast.success('Student created', {
+                toast.success('Created', {
                     duration: 3000,
                     position: 'bottom-right',
                     style: {
@@ -79,7 +79,7 @@ export function CompanyFormPage() {
         if (params.company_cif) {
             async function loadCompany() {
                 try {
-                    const company = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.company_cif}/`, {
+                    const company = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/companies/${params.company_cif}/`, {
                         withCredentials: true,
                         headers: {
                             'Content-Type': 'application/json'
@@ -150,7 +150,7 @@ export function CompanyFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this item?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/companies/${params.id}/`, data, {
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/companies/${params.id}/`, data, {
                                     withCredentials: true,
                                     headers: {
                                         'Content-Type': 'application/json'

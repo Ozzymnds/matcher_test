@@ -10,7 +10,7 @@ export function List() {
 
     const loadCompanies = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/companies/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export function List() {
 
     const loadCompaniesFeedback = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companyfeedback/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/companyfeedback/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'

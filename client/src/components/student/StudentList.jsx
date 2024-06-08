@@ -13,7 +13,7 @@ export function StudentList() {
     useEffect(() => {
         const fetchMatches = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/funciones/match/');
+                const response = await axios.get('http://127.0.0.1:80/api/funciones/match/');
                 setMatches(response.data);
             } catch (error) {
                 console.error('Error fetching matches:', error);
@@ -29,7 +29,7 @@ export function StudentList() {
 
     const loadStudents = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/students/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export function StudentList() {
 
     const loadTeachers = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/teachers/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/teachers/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export function StudentList() {
 
     const loadCompanies = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/companies/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/companies/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'

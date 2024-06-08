@@ -14,7 +14,7 @@ export function CFeedbackFormPage() {
 
     const dropdownCompanies = async () => {
         try {
-            const companies = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companies/`, {
+            const companies = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/companies/`, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export function CFeedbackFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/companyfeedback/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/companyfeedback/${params.id}/`, data, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export function CFeedbackFormPage() {
                 });
                 navigate('/companyfeedback');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/companyfeedback/', data, {
+                res = await axios.post('http://127.0.0.1:80/api/funciones/api/v1/companyfeedback/', data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -81,7 +81,7 @@ export function CFeedbackFormPage() {
     const loadCompanyFeedback = async () => {
         if (params.id) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/companyfeedback/${params.id}/`, {
+                const res = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/companyfeedback/${params.id}/`, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ export function CFeedbackFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar este ítem?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/companyfeedback/${params.id}/`);
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/companyfeedback/${params.id}/`);
                                 toast.success('Deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

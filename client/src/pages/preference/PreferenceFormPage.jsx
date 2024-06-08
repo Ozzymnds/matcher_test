@@ -15,7 +15,7 @@ export function PreferenceFormPage() {
 
     const dropdownActivities = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/activities/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/activities/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export function PreferenceFormPage() {
 
     const dropdownStudents = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/students/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export function PreferenceFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/preferences/${params.id}/`, data, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export function PreferenceFormPage() {
                 });
                 navigate('/preferences');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/preferences/', data, {
+                res = await axios.post('http://127.0.0.1:80/api/funciones/api/v1/preferences/', data, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ export function PreferenceFormPage() {
     const loadPreference = async () => {
         if (params.id) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`, {
+                const res = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/preferences/${params.id}/`, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ export function PreferenceFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('¿Estás seguro de que quieres eliminar esta preferencia?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/preferences/${params.id}/`);
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/preferences/${params.id}/`);
                                 toast.success('Preference deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

@@ -10,7 +10,7 @@ export function List() {
 
     const loadStudents = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/students/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/students/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export function List() {
 
     const loadStudentsFeedback = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/funciones/api/v1/studentfeedback/', {
+            const res = await axios.get('http://127.0.0.1:80/api/funciones/api/v1/studentfeedback/', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'

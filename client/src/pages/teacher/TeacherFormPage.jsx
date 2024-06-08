@@ -13,7 +13,7 @@ export function TeacherFormPage() {
 
     const dropdown = async () => {
         try {
-            const dropdownSchools = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/schools/`, {
+            const dropdownSchools = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/schools/`, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export function TeacherFormPage() {
         try {
             let res;
             if (params.dni) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/teachers/${params.dni}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/teachers/${params.dni}/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -51,7 +51,7 @@ export function TeacherFormPage() {
                 });
                 navigate('/teachers');
             } else {
-                res = await axios.post('http://127.0.0.1:8000/funciones/api/v1/teachers/', data, {
+                res = await axios.post('http://127.0.0.1:80/api/funciones/api/v1/teachers/', data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -84,7 +84,7 @@ export function TeacherFormPage() {
     const loadTeacher = async () => {
         if (params.dni) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/teachers/${params.dni}/`, {
+                const res = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/teachers/${params.dni}/`, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -169,7 +169,7 @@ export function TeacherFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this field?')
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/teachers/${params.dni}/`);
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/teachers/${params.dni}/`);
                                 toast.success('Teacher deleted', {
                                     duration: 3000,
                                     position: 'bottom-right',

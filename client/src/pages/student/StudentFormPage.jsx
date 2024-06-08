@@ -14,7 +14,7 @@ export function StudentFormPage() {
 
     const dropdownTeachers = async () => {
         try {
-            const teachers = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/teachers/`, {
+            const teachers = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/teachers/`, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export function StudentFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/students/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/students/${params.id}/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -51,7 +51,7 @@ export function StudentFormPage() {
                     navigate('/students');
                 }
             } else {
-                res = await axios.post(`http://127.0.0.1:8000/funciones/api/v1/students/`, data, {
+                res = await axios.post(`http://127.0.0.1:80/api/funciones/api/v1/students/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -82,7 +82,7 @@ export function StudentFormPage() {
     const loadStudent = async () => {
         if (params.id) {
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/students/${params.id}/`, {
+                const res = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/students/${params.id}/`, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json'
@@ -182,7 +182,7 @@ export function StudentFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this student?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/students/${params.id}/`, {
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/students/${params.id}/`, {
                                     withCredentials: true,
                                     headers: {
                                         'Content-Type': 'application/json'

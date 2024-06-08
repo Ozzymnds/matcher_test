@@ -15,12 +15,12 @@ export function SchoolFormPage() {
         try {
             let res;
             if (params.id) {
-                res = await axios.put(`http://127.0.0.1:8000/funciones/api/v1/schools/${params.id}/`, data, {
+                res = await axios.put(`http://127.0.0.1:80/api/funciones/api/v1/schools/${params.id}/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-                toast.success('Student updated', {
+                toast.success('School updated', {
                     duration: 3000,
                     position: 'bottom-right',
                     style: {
@@ -29,12 +29,12 @@ export function SchoolFormPage() {
                     }
                 });
             } else {
-                res = await axios.post(`http://127.0.0.1:8000/funciones/api/v1/schools/`, data, {
+                res = await axios.post(`http://127.0.0.1:80/api/funciones/api/v1/schools/`, data, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-                toast.success('Student created', {
+                toast.success('School registered', {
                     duration: 3000,
                     position: 'bottom-right',
                     style: {
@@ -61,7 +61,7 @@ export function SchoolFormPage() {
         async function loadSchool() {
             if (params.id) {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/funciones/api/v1/schools/${params.id}/`, {
+                    const response = await axios.get(`http://127.0.0.1:80/api/funciones/api/v1/schools/${params.id}/`, {
                         withCredentials: true,
                         headers: {
                             'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ export function SchoolFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Are you sure you want to delete this school?');
                             if (accepted) {
-                                await axios.delete(`http://127.0.0.1:8000/funciones/api/v1/activities/${params.id}/`, data, {
+                                await axios.delete(`http://127.0.0.1:80/api/funciones/api/v1/activities/${params.id}/`, data, {
                                     withCredentials: true,
                                     headers: {
                                         'Content-Type': 'application/json'
