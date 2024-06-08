@@ -1,29 +1,28 @@
-version: '3'
 services:
-  matcher-backend:
-    container_name: matcher-backend
+  matcher:
+    container_name: matcher
     build:
       context: .
       dockerfile: ./dockerfiles/Dockerfile_Django_${ENVIRONMENT}
     env_file:
       - ./.env
-    environment: 
+    environment:
       - ENVIRONMENT=${ENVIRONMENT}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD_DJANGO}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
     ports:
       - "8000:8000"
     volumes:
-      - ./matcher_backend:/code/matcher_backend
-    healthcheck:
-      test: curl --fail http://localhost:8000/funciones/api/v1/healthcheck || exit 1
-      interval: 60s
-      timeout: 10s
-      start_period: 10s
-      retries: 3
+      - ./matcher:/code/matcher
+    # healthcheck:
+    #   test: curl --fail http://localhost:8000/funciones/api/v1/healthcheck || exit 1
+    #   interval: 60s
+    #   timeout: 10s
+    #   start_period: 10s
+    #   retries: 3
 
-  client-frontend:
-    container_name: client-frontend
+  client:
+    container_name: client
     build:
       context: .
       dockerfile: ./dockerfiles/Dockerfile_React_${ENVIRONMENT}
@@ -32,12 +31,12 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - ./client_frontend/:/client_frontend/
+      - ./client/:/client/
 
   funciones-db:
     container_name: matcher-db
     image: postgres:14.7
-    volumes: 
+    volumes:
       - ./postgres_data:/var/lib/postgres/data/
     environment:
       - POSTGRES_USER=django
@@ -48,19 +47,17 @@ services:
     ports:
       - "5432:5432"
 
-  # matcher-nginx:
-  #   image: nginx:latest
-  #   container_name: matcher-nginx
-  #   restart: unless-stopped
-  #   ports:
-  #     - ${PORT}:${PORT}
-  #   volumes:
-  #     - ./nginx/nginx_${ENVIRONMENT}.conf:/etc/nginx/nginx.conf
-  #     - ./all_services_ca/:/etc/nginx/ssl/:ro
-  #     - ./{{ app_name_with_underscores }}_frontend/build/:/srv/{{ app_name_with_underscores }}_frontend/build/
-  #   depends_on:
-  #     - matcher-backend
-  
+  matcher-nginx:
+    image: nginx:latest
+    container_name: matcher-nginx
+    restart: unless-stopped
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./nginx/nginx_${ENVIRONMENT}.conf:/etc/nginx/nginx.conf
+      - ./all_services_ca/:/etc/nginx/ssl/:ro
+      # - ./client/build/:/srv/client/build/
+
 volumes:
   postgres_data: {}
   matcher_backend: {}

@@ -11,11 +11,11 @@ WORKDIR /code
 RUN apt-get update
 
 # Copy project
-COPY ../matcher/ ./matcher/
+COPY ./matcher/ ./matcher/
 ENV PYTHONPATH /code/matcher:$PYTHONPATH
 
 # Install dependencies
-COPY ../requirements.txt ./requirements.txt
+COPY ./requirements.txt ./requirements.txt
 RUN pip install -r ./requirements.txt
 
 COPY ./entrypoints/tail_f.sh .

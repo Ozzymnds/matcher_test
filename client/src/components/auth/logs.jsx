@@ -5,23 +5,9 @@ axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
 
-export const getCsrfToken = async () => {
-    try {
-        const response = await axios.post('http://127.0.0.1:8000/auth/get-csrf-token/');
-        const csrfToken = Cookies.get('csrftoken');
-        console.log('CSRF token obtained:', csrfToken);
-        return csrfToken;
-    } catch (error) {
-        console.error('Error getting CSRF token:', error);
-        return null;
-    }
-};
-
 export const login = async ({ username, password, handleShow }) => {
     try {
-        await getCsrfToken();
-
-        const response = await axios.post('http://127.0.0.1:8000/auth/login/', {
+        const response = await axios.post('http://127.0.0.1:80/api/auth/login/', {
             username: username,
             password: password,
         });
@@ -50,9 +36,8 @@ export const login = async ({ username, password, handleShow }) => {
 
 export const logout = async () => {
     try {
-        const csrftoken = await getCsrfToken(); // Obtiene el token CSRF antes de la solicitud de logout
-
-        const response = await axios.post('http://127.0.0.1:8000/auth/logout/', {}, {
+        const csrftoken = Cookies.get("csrftoken");
+        const response = await axios.post('http://127.0.0.1:8000/auth/logout/', { withCredentials: true }, {
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Content-Type': 'application/json'
@@ -67,7 +52,7 @@ export const logout = async () => {
         window.location.href = '/login';
     } catch (error) {
         if (error.response) {
-            console.error('Error response:', error.response);
+            console.error('Error response:', error.response.data);
         } else if (error.request) {
             console.error('Error request:', error.request);
         } else {

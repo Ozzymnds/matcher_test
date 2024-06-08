@@ -7,7 +7,7 @@ export const MatchView = () => {
     useEffect(() => {
         const fetchMatches = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/funciones/match/');
+                const response = await axios.get('http://127.0.0.1:80/api/funciones/match/');
                 setMatches(response.data);
             } catch (error) {
                 console.error('Error fetching matches:', error);
@@ -16,7 +16,7 @@ export const MatchView = () => {
 
         fetchMatches(); // Initial fetch
 
-        const interval = setInterval(fetchMatches, 5000); // Fetch every 5 seconds
+        const interval = setInterval(fetchMatches, 500);
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);

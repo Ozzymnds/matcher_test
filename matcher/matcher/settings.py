@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 from corsheaders.defaults import default_headers
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'django_ckeditor_5',
     'coreapi',
     'funciones',
     'rest_framework.authtoken',
@@ -98,8 +98,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': 'django',
         'NAME': 'django',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD_DJANGO'),
+        'HOST': 'matcher-db',
         'PORT': '5432',
     }
 }
@@ -147,11 +147,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173',
-                        "http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:3000",]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:5173',
+    "http://127.0.0.1:80"
+]
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173',
-                        "http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:3000",]
+                        "http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:3000", 'http://127.0.0.1']
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
