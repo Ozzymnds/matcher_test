@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Navigation } from "../../components/teacher/TeacherNavigation";
 
-export function TeacherFormPage() {
+function TeacherFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -186,3 +186,6 @@ export function TeacherFormPage() {
         </div>
     );
 }
+
+
+export default TeacherFormPage;

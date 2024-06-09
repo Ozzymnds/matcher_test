@@ -1,5 +1,7 @@
 import { StudentList } from "../../components/student/StudentList";
 
-export function StudentPage () {
+function StudentPage () {
     return <StudentList />;
 }
+
+export default StudentPage;

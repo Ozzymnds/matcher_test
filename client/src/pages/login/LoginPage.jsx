@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../../components/auth/logs';
 
-export const LoginForm = () => {
+const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showError, setShowError] = useState(false);
 
@@ -32,3 +32,5 @@ export const LoginForm = () => {
         </div>
     );
 };
+
+export default LoginForm;

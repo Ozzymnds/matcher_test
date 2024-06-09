@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Navigation } from "../../../components/feedbacks/teachers/Navigation";
 
-export function TFeedbackFormPage() {
+function TFeedbackFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -167,3 +167,6 @@ export function TFeedbackFormPage() {
         </div>
     );
 }
+
+
+export default TFeedbackFormPage;

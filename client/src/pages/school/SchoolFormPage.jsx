@@ -5,7 +5,7 @@ import { Navigation } from "../../components/school/SchoolNavigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-export function SchoolFormPage() {
+function SchoolFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     const navigate = useNavigate();
@@ -142,3 +142,6 @@ export function SchoolFormPage() {
         </div>
     );
 }
+
+
+export default SchoolFormPage;

@@ -53,6 +53,33 @@ class StudentFeedbackView(viewsets.ModelViewSet):
     queryset = StudentFeedback.objects.all()
 
 
+class RegisterStudent(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RegisterTeacher(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = TeacherSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RegisterCompany(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = CompanySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class MatcherView(APIView):
     def get(self, request, format=None):
         preferences = Preference.objects.select_related('student', 'activity')

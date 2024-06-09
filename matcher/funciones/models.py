@@ -12,8 +12,8 @@ class Teacher(models.Model):
     teacher_dni = models.CharField(max_length=9, primary_key=True)
     name = models.CharField(max_length=255, null=False)
     last_name = models.CharField(max_length=255, null=True, blank=True)
-    phone_number = models.CharField(max_length=20, null=False)
-    school_mail = models.EmailField(null=True, blank=True)
+    phone_number = models.CharField(max_length=20)
+    school_mail = models.EmailField(null=True)
     school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
@@ -28,7 +28,7 @@ class Activity(models.Model):
 class Company(models.Model):
     company_cif = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
-    address = models.CharField(max_length=255, null=False)
+    address = models.CharField(max_length=255)
     mail = models.EmailField(null=False)
     website = models.URLField(null=True, blank=True)
     work_area = models.ForeignKey(Activity, on_delete=models.CASCADE)

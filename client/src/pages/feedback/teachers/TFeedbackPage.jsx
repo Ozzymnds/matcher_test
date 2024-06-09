@@ -1,4 +1,6 @@
 import { List } from '../../../components/feedbacks/teachers/List';
-export function TFeedbackPage() {
+function TFeedbackPage() {
     return <List />;
 }
+
+export default TFeedbackPage;

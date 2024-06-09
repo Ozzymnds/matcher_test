@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 from funciones import views
-from .views import MatcherView
+from .views import MatcherView, RegisterStudent, RegisterTeacher, RegisterCompany
 
 router = routers.DefaultRouter()
 router.register(r'schools', views.SchoolView, 'schools')
@@ -19,4 +19,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('docs/', include_docs_urls(title='Matcher API')),
     path('match/', MatcherView.as_view(), name='match-view'),
+    path('register-student/', RegisterStudent.as_view(), name='register_student'),
+    path('register-teacher/', RegisterTeacher.as_view(), name='register_teacher'),
+    path('register-company/', RegisterCompany.as_view(), name='register_company'),
 ]

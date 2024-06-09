@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { Navigation } from "../../components/company/CompanyNavigation";
 import axios from "axios";
 
-export function CompanyFormPage() {
+function CompanyFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -174,3 +174,6 @@ export function CompanyFormPage() {
         </div>
     );
 }
+
+
+export default CompanyFormPage;

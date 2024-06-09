@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-export function StudentFormPage() {
+function StudentFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -207,3 +207,6 @@ export function StudentFormPage() {
         </div>
     );
 }
+
+
+export default StudentFormPage;

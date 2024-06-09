@@ -1,4 +1,6 @@
 import { List } from '../../../components/feedbacks/companies/List';
-export function CFeedbackPage() {
+function CFeedbackPage() {
     return <List />;
 }
+
+export default CFeedbackPage;

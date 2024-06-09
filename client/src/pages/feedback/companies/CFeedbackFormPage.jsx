@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Navigation } from "../../../components/company/CompanyNavigation";
 
-export function CFeedbackFormPage() {
+function CFeedbackFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -167,3 +167,6 @@ export function CFeedbackFormPage() {
         </div>
     );
 }
+
+
+export default CFeedbackFormPage;

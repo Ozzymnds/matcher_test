@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Navigation } from "../../components/activity/ActivityNavigation";
 
-export function ActivityFormPage() {
+function ActivityFormPage() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -133,3 +133,5 @@ export function ActivityFormPage() {
         </div>
     );
 }
+
+export default ActivityFormPage;

@@ -49,7 +49,7 @@ export const logout = async () => {
         localStorage.removeItem('isAuthenticated');
 
         // Redirige a la página de login
-        window.location.href = '/login';
+        window.location.href = '/';
     } catch (error) {
         if (error.response) {
             console.error('Error response:', error.response.data);

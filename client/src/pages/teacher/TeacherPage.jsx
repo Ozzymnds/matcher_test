@@ -1,5 +1,7 @@
 import { TeacherList } from "../../components/teacher/TeacherList";
 
-export function TeacherPage() {
+function TeacherPage() {
     return <TeacherList />;
 }
+
+export default TeacherPage;

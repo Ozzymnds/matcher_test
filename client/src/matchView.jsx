@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const MatchView = () => {
+const MatchView = () => {
     const [matches, setMatches] = useState([]);
 
     useEffect(() => {
@@ -34,3 +34,5 @@ export const MatchView = () => {
         </div>
     );
 };
+
+export default MatchView;

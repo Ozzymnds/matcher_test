@@ -1,5 +1,7 @@
 import { ActivityList } from "../../components/activity/ActivityList";
 
-export function ActivityPage() {
+function ActivityPage() {
     return <ActivityList />;
 }
+
+export default ActivityPage;

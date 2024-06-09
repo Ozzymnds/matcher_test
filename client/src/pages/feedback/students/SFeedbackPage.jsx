@@ -1,4 +1,6 @@
 import { List } from '../../../components/feedbacks/students/List';
-export function SFeedbackPage() {
+function SFeedbackPage() {
     return <List />;
 }
+
+export default SFeedbackPage;

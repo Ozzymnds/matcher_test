@@ -3,5 +3,5 @@ docker compose exec -it matcher bash
 python3 matcher/manage.py runserver 0.0.0.0:8000
 
 para acceder al bash de docker y luego ejecutar el frontend de react
-docker compose exec -it client bash
+docker compose exec -it client bash
 npm run dev -- --host 0.0.0.0 --port 5173

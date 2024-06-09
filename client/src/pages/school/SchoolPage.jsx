@@ -1,5 +1,7 @@
 import { SchoolList } from "../../components/school/SchoolsList";
 
-export function SchoolPage() {
+function SchoolPage() {
     return <SchoolList />;
 };
+
+export default SchoolPage;

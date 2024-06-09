@@ -1,5 +1,8 @@
 import { PreferenceList } from "../../components/preference/PreferenceList";
 
-export function PreferencePage() {
+function PreferencePage() {
     return <PreferenceList />;
 }
+
+
+export default PreferencePage;
