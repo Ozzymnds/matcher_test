@@ -1,20 +1,11 @@
-
 from django.db import models
+from django.conf import settings
 
 
 class School(models.Model):
     school_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=False)
-
-
-class Teacher(models.Model):
-    teacher_dni = models.CharField(max_length=9, primary_key=True)
-    name = models.CharField(max_length=255, null=False)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
-    phone_number = models.CharField(max_length=20)
-    school_mail = models.EmailField(null=True)
-    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
 
 
 class Activity(models.Model):
@@ -25,6 +16,17 @@ class Activity(models.Model):
         return self.name
 
 
+class Teacher(models.Model):
+    teacher_dni = models.CharField(max_length=9, primary_key=True)
+    name = models.CharField(max_length=255, null=False)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = models.CharField(max_length=9)
+    school_mail = models.EmailField(null=True)
+    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, default=None,
+                                   null=True, on_delete=models.DO_NOTHING, db_column="id_usuario")
+
+
 class Company(models.Model):
     company_cif = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
@@ -32,6 +34,8 @@ class Company(models.Model):
     mail = models.EmailField(null=False)
     website = models.URLField(null=True, blank=True)
     work_area = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, default=None,
+                                   null=True, on_delete=models.DO_NOTHING, db_column="id_usuario")
 
 
 class Student(models.Model):
@@ -43,6 +47,8 @@ class Student(models.Model):
     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     company = models.ForeignKey(
         Company, null=True, blank=True, on_delete=models.SET_NULL)
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, default=None,
+                                   null=True, on_delete=models.DO_NOTHING, db_column="id_usuario")
 
 
 class Preference(models.Model):

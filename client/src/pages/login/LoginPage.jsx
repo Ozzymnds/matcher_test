@@ -11,8 +11,8 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center">
-            <form className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mt-10" onSubmit={handleSubmit(onSubmit)}>
+        <div className="register-container">
+            <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
                 <label>
                     Username:
                     <input type="text" className="bg-gray-200 p-3 rounded-lg block w-full mb-3 text-gray-800" {...register("username", { required: true })} />
@@ -25,7 +25,7 @@ const LoginForm = () => {
                 </label>
                 {errors.password && <span>This field is required</span>}
 
-                <button className="bg-indigo-500 text-white p-3 rounded-lg block w-full mt-3" type="submit">Login</button>
+                <button className="submit-button" type="submit">Login</button>
             </form>
 
             {showError && <div className="error">Invalid credentials, please try again.</div>}

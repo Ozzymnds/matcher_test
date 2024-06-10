@@ -1,6 +1,7 @@
 from authenticate.models import UsuarioTipoUsuario
 from funciones.models import Company, Student, Teacher, Activity, School
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login, logout, authenticate
@@ -21,6 +22,8 @@ from authenticate.models import (
     UsuarioTipoUsuario,
 )
 from django.db import transaction
+from funciones.models import Teacher, Student, Company
+from funciones.serializers import CompanySerializer, StudentSerializer, TeacherSerializer
 
 logger = logging.getLogger('django')
 
@@ -73,7 +76,7 @@ class CreateUser(APIView):
                 "El tipo de usuario puede ser únicamente 'Estudiante', 'Empresa' o 'Docente'."
             )
 
-    def _create_related_instance(self, tipo_usuario, request):
+    def _create_related_instance(self, tipo_usuario, request, usuario):
         if tipo_usuario == "Estudiante":
             Student.objects.create(
                 student_dni=request.data.get('student_dni'),
@@ -84,7 +87,8 @@ class CreateUser(APIView):
                 teacher_id=Teacher.objects.get(
                     teacher_dni=request.data.get('teacher_dni')),
                 company=Company.objects.get(company_cif=request.data.get(
-                    'company_cif')) if request.data.get('company_cif') else None
+                    'company_cif')) if request.data.get('company_cif') else None,
+                id_usuario=usuario
             )
         elif tipo_usuario == "Empresa":
             Company.objects.create(
@@ -93,7 +97,8 @@ class CreateUser(APIView):
                 mail=request.data.get('mail'),
                 website=request.data.get('website'),
                 work_area=Activity.objects.get(
-                    activity_id=request.data.get('activity_id'))
+                    activity_id=request.data.get('activity_id')),
+                id_usuario=usuario
             )
         elif tipo_usuario == "Docente":
             school_id = request.data.get('school_id')
@@ -106,7 +111,8 @@ class CreateUser(APIView):
                 last_name=request.data.get('last_name'),
                 phone_number=request.data.get('phone_number'),
                 school_mail=request.data.get('school_mail'),
-                school_id=School.objects.get(school_id=school_id)
+                school_id=School.objects.get(school_id=school_id),
+                id_usuario=usuario
             )
 
     def post(self, request, *args, **kwargs):
@@ -159,7 +165,7 @@ class CreateUser(APIView):
                 relacion_tipo_usuario.save()
 
                 # Crear instancia relacionada
-                self._create_related_instance(tipo_usuario, request)
+                self._create_related_instance(tipo_usuario, request, usuario)
 
             return Response({'detail': 'Usuario creado satisfactoriamente.'}, status=status.HTTP_201_CREATED)
 
@@ -200,13 +206,54 @@ class BrowserSessionView(APIView):
             return Response({'isAuthenticated': False}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class WhoAmIView(ApiViewSessionAuth):
+class WhoAmIView(APIView):
     @staticmethod
     def get(request, format=None):
         if request.user.is_authenticated:
             logger.info(f"[{request.path}] [{request.user.username}]")
-            tipo_usuario = UsuarioTipoUsuario.objects.get(
-                id_usuario=request.user).tipo_usuario
-            return Response({'username': request.user.username, "tipo_usuario": tipo_usuario}, status=status.HTTP_200_OK)
+            try:
+                tipo_usuario = UsuarioTipoUsuario.objects.get(
+                    id_usuario=request.user).tipo_usuario
+
+                user_data = None
+                if tipo_usuario == "teacher":
+                    user = Teacher.objects.get(id_usuario=request.user)
+                    user_data = TeacherSerializer(user).data
+                elif tipo_usuario == "company":
+                    user = Company.objects.get(id_usuario=request.user)
+                    user_data = CompanySerializer(user).data
+                elif tipo_usuario == "student":
+                    user = Student.objects.get(id_usuario=request.user)
+                    user_data = StudentSerializer(user).data
+
+                return Response({
+                    'username': request.user.username,
+                    'tipo_usuario': tipo_usuario,
+                    'id': request.user.id,
+                    'user_data': user_data
+                }, status=status.HTTP_200_OK)
+
+            except UsuarioTipoUsuario.DoesNotExist:
+                return Response({'error': 'User type not found'}, status=status.HTTP_404_NOT_FOUND)
+            except (Teacher.DoesNotExist, Company.DoesNotExist, Student.DoesNotExist):
+                return Response({'error': 'User data not found'}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({'username': None, "admin": False}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class TeacherDetailView(RetrieveAPIView):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+    lookup_field = 'teacher_dni'
+
+
+class CompanyDetailView(RetrieveAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    lookup_field = 'company_cif'
+
+
+class StudentDetailView(RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    lookup_field = 'student_dni'

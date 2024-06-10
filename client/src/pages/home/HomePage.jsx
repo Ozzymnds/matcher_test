@@ -13,7 +13,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('/api/auth/whoami/');
+                const response = await axios.get('http://127.0.0.1:80/api/auth/whoami/');
                 setUser(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);

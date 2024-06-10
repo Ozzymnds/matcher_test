@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Navigation = () => {
-    console.log('Navigation render');
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -16,19 +15,19 @@ const Navigation = () => {
 
     return (
         <nav className="bg-blue-600 p-4 flex justify-between items-center text-white">
-            <div className="font-semibold text-lg">Mi Aplicación</div>
+            <div className="font-semibold text-lg">Details </div>
             <div>
                 <button
-                    onClick={() => navigate("/user-details")}
+                    onClick={() => navigate("/home")}
                     className="bg-white text-blue-600 py-1 px-3 rounded-lg mr-4"
                 >
-                    Detalles del Usuario
+                    Home
                 </button>
                 <button
                     onClick={handleLogout}
                     className="bg-red-600 text-white py-1 px-3 rounded-lg"
                 >
-                    Cerrar Sesión
+                    Logout
                 </button>
             </div>
         </nav>

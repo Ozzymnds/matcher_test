@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import '../../style/HomePage.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -170,9 +171,9 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="register-container">
             <h2>Registro de Usuario</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="register-form">
                 <div>
                     <label>Nombre de Usuario:</label>
                     <input
@@ -213,7 +214,7 @@ const Register = () => {
                 </div>
                 {renderAdditionalFields()}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Registrar</button>
+                <button type="submit" className="submit-button">Registrar</button>
             </form>
         </div>
     );

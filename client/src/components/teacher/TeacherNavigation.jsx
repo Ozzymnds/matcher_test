@@ -9,11 +9,6 @@ export function Navigation() {
                     <h2>Home</h2>
                 </Link>
             </div>
-            <div className="navigation-item">
-                <Link to="/teachers" className="navigation-link">
-                    <h2>Profesores</h2>
-                </Link>
-            </div>
         </div>
     );
 }
